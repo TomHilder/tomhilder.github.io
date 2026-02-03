@@ -25,6 +25,9 @@ menu:
         - name: Blog
           url: blog/
           weight: 4
+        - name: About
+          url: about/
+          weight: 5
 
 params:
     description: "Personal website of Tom Hilder, PhD Candidate at Monash University researching the ionised interstellar medium using computational statistics and scalable Gaussian Process methods."
