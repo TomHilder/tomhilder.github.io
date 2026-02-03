@@ -24,15 +24,14 @@
 .software-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 16px;
     margin-top: 20px;
-    justify-content: center;
 }
 
 .software-grid .post-entry {
-    flex: 0 0 calc(33.333% - 14px);
+    flex: 0 0 calc(33.333% - 12px);
     margin: 0;
-    min-width: 240px;
+    min-width: 180px;
     text-align: center;
 }
 
@@ -41,20 +40,20 @@
 }
 
 .software-grid .post-entry .entry-header {
-    padding: 12px 16px 16px;
+    padding: 8px 12px 12px;
 }
 
 .software-grid .post-entry .entry-header h2 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     margin: 0;
 }
 
 .software-grid .entry-cover {
-    padding: 24px 16px;
+    padding: 16px 12px;
 }
 
 .software-grid .entry-cover img {
-    max-height: 180px;
+    max-height: 120px;
     object-fit: contain;
     background: var(--entry);
 }
@@ -65,7 +64,7 @@
 
 @media (max-width: 900px) {
     .software-grid .post-entry {
-        flex: 0 0 calc(50% - 10px);
+        flex: 0 0 calc(50% - 8px);
     }
 }
 
