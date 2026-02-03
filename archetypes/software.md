@@ -1,7 +1,7 @@
 ---
 title: "Package Name"
 date: 2024-01-01
-tags: ["python", "gaussian processes"]
+tags: ["python", "topic"]
 author: "Tom Hilder"
 description: "Brief description for search engines (< 155 chars)"
 summary: "Summary shown on list pages (< 265 chars)"
@@ -9,56 +9,22 @@ cover:
     image: "logo.png"
     alt: "Package logo"
     relative: true
-editPost:
-    URL: "https://github.com/tomhilder/package"
-    Text: "GitHub"
+# Uncomment the line below to make this card link directly to GitHub (no page on site)
+# externalUrl: "https://github.com/tomhilder/package"
 
 ---
 
----
-
-##### Links
-
-- [GitHub](https://github.com/tomhilder/package)
-- [Documentation](https://package.readthedocs.io)
-- [PyPI](https://pypi.org/project/package)
+*One-line description of what it does.*
 
 ---
 
-##### Description
-
-Brief description of what the software does and why it's useful.
+**Links:** [GitHub](https://github.com/tomhilder/package) · [Docs](https://package.readthedocs.io) · [PyPI](https://pypi.org/project/package)
 
 ---
 
-##### Installation
+What problem does this solve? Why did you build it?
 
-```bash
-pip install package
-```
+![](screenshot.png)
+*Caption.*
 
----
-
-##### Example
-
-```python
-import package
-
-# Basic usage example
-result = package.function(data)
-```
-
----
-
-##### Citation
-
-If you use this software, please cite:
-
-```BibTeX
-@software{hilder2024package,
-  author = {Hilder, Tom},
-  title = {Package Name},
-  year = {2024},
-  url = {https://github.com/tomhilder/package}
-}
-```
+More details, usage examples, etc.

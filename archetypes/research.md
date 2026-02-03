@@ -1,52 +1,26 @@
 ---
-title: "Paper Title"
+title: "Post Title"
 date: 2024-01-01
-tags: ["gaussian processes", "interstellar medium"]
-author: ["Tom Hilder", "Coauthor Name"]
+tags: ["topic"]
+author: "Tom Hilder"
 description: "Brief description for search engines (< 155 chars)"
 summary: "Summary shown on list pages (< 265 chars)"
-cover:
-    image: "figure.png"
-    alt: "Figure caption"
-    relative: true
-editPost:
-    URL: "https://doi.org/10.xxxx/xxxxx"
-    Text: "Journal Name"
 
 ---
 
----
-
-##### Links
-
-- [Paper (PDF)](paper.pdf)
-- [arXiv](https://arxiv.org/abs/XXXX.XXXXX)
-- [Code](https://github.com/tomhilder/repo)
+*Subtitle or one-line hook goes here.*
 
 ---
 
-##### Abstract
-
-Your abstract here.
+**Paper:** Paper Title Here
+**Authors:** First Author, Second Author, ..., et al.
+**Links:** [Publisher](https://doi.org/) · [arXiv](https://arxiv.org/abs/) · [Code](https://github.com/tomhilder/)
 
 ---
 
-##### Key Figure
+Your informal discussion of the work goes here. What's the big picture? Why does it matter? What's the cool part?
 
 ![](figure.png)
+*Caption for the figure.*
 
----
-
-##### Citation
-
-Hilder, T., et al. 2024. "Title." *Journal* Volume: Pages. https://doi.org/10.xxxx/xxxxx.
-
-```BibTeX
-@article{hilder2024,
-  author = {Hilder, Tom and Coauthor, Name},
-  title = {Paper Title},
-  journal = {Journal},
-  year = {2024},
-  doi = {10.xxxx/xxxxx}
-}
-```
+More discussion, insights, or context...
