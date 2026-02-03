@@ -13,8 +13,10 @@ summary: "Summary shown on list pages (< 265 chars)"
 ---
 
 **Paper:** Paper Title Here
+
 **Authors:** First Author, Second Author, ..., et al.
-**Links:** [Publisher](https://doi.org/) · [arXiv](https://arxiv.org/abs/) · [Code](https://github.com/tomhilder/)
+
+**Links:** [Journal](https://doi.org/) · [arXiv](https://arxiv.org/abs/) · [Code](https://github.com/tomhilder/)
 
 ---
 

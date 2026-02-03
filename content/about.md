@@ -1,5 +1,6 @@
 ---
-title: "About"
+title: "About Me"
+author: " "
 description: "About Tom Hilder"
 ---
 
@@ -7,21 +8,34 @@ description: "About Tom Hilder"
 
 I am a PhD candidate at the School of Physics & Astronomy, Monash University.
 
-## Research Interests
+<!-- During my PhD I have been advised by [A/Prof. Andrew Casey](https://astrowizici.st), Prof. Daniel J. Price, and A/Prof. Christophe Pinte. -->
+
+<!-- ## Research Interests
 
 - The ionised interstellar medium
 - Computational statistics
-- Scalable Gaussian Process methods
+- Scalable Gaussian Process methods -->
 
-## Education
+<!-- ## Education
 
-<!-- Add your education history here -->
+#### 2023 - present
+
+*Doctor of Philosophy*, Astrophysics \
+Monash University, Melbourne, VIC, Australia \
+*Advisors*: A/Prof. Andrew Casey, Prof. Daniel Price, A/Prof. Christophe Pinte
+<!-- *Thesis*: “Spectrospatial Forward Models in Astrophysics” -->
+
+<!-- #### 2019 - 2022
+
+*Bachelor of Science Advanced - Research (Honours)* \
+Monash University, Melbourne, VIC, Australia \
+*Honours Advisors*: Prof. Daniel Price, A/Prof. Christophe Pinte -->
+<!-- Astrophysics Extended Major, Mathematics Minor \ -->
+<!-- Graduated with First Class Honours \ -->
+<!-- Honours Thesis: “Measuring Young Planets from their Spiral Wakes” -->
 
 ## Contact
 
-- **Email:** thomas.hilder@monash.edu
-- **GitHub:** [tomhilder](https://github.com/tomhilder)
-- **Google Scholar:** [Profile](https://scholar.google.com/citations?user=q0Ol5jsAAAAJ&hl=en)
-- **ORCID:** [0000-0001-7641-5235](https://orcid.org/0000-0001-7641-5235)
-- **LinkedIn:** [thomas-hilder](https://www.linkedin.com/in/thomas-hilder-10623425a)
-- **Bluesky:** [@tom-hilder.bsky.social](https://bsky.app/profile/tom-hilder.bsky.social)
+If you're interested in collaboration, have a question about my research, or otherwise wish to contact me, feel free to do so at <thomas.hilder@monash.edu>.
+
+You can find my other links by clicking my name in the top left corner of this page.
