@@ -1,5 +1,5 @@
-baseURL: "https://pascalmichaillat.org/hugo-website/" 
-title: Moritz-Maria von Igelfeld
+baseURL: "https://tomhilder.github.io/"
+title: Tom Hilder
 theme: PaperMod
 
 enableInlineShortcodes: true
@@ -12,25 +12,22 @@ taxonomies:
 
 menu:
     main:
-        - name: Books
-          url: books/
-          weight: 5 
-        - name: Papers
-          url: papers/
+        - name: Research
+          url: research/
+          weight: 1
+        - name: Software
+          url: software/
           weight: 2
-        - name: Courses
-          url: courses/
+        - name: Talks
+          url: talks/
           weight: 3
-        - name: Data
-          url: data/
-          weight: 4 
         - name: Blog
-          url: https://en.wikipedia.org/wiki/Moritz-Maria_von_Igelfeld_(character)
-          weight: 6
+          url: blog/
+          weight: 4
 
 params:
-    description: "This website hosts Moritz-Maria von Igelfeld's research papers, books, course materials, data, curriculum vitae, and contact information."
-    author: Moritz-Maria von Igelfeld
+    description: "Personal website of Tom Hilder, PhD Candidate at Monash University researching the ionised interstellar medium using computational statistics and scalable Gaussian Process methods."
+    author: Tom Hilder
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
     defaultTheme: light
@@ -44,7 +41,7 @@ params:
     ShowBreadCrumbs: false
     ShowCodeCopyButtons: true
     ShowAllPagesInArchive: false
-    MainSections: ["books","courses","papers","data"]
+    MainSections: ["research","software","talks","blog"]
     ShowToc: false
     disableScrollToTop: true
     TocOpen: true
@@ -54,50 +51,38 @@ params:
     math: true
     profileMode:
           enabled: true
-          title: Professor Dr von Igelfeld
-          subtitle: "I am a Professor in the Institute of Romance Philology at the University of Regensburg, Germany. My research focuses on Portuguese irregular verbs. I was a doctoral student of Professor Dr Dieter Vogelsang in Munich, and later a second assistant of Professor Walter Schoeffler-Henschell at the University of Wiesbaden."
+          title: Tom Hilder
+          subtitle: "PhD Candidate at the School of Physics & Astronomy, Monash University. I study the ionised interstellar medium using computational statistics, particularly cutting-edge scalable Gaussian Process methods."
           imageUrl: "picture.jpeg"
           imageWidth: 160
           imageHeight: 160
           buttons:
-            - name: Papers
-              url: papers/
-            - name: Data
-              url: data/
-            - name: Books
-              url: books/
-            - name: Courses
-              url: courses/
+            - name: Research
+              url: research/
+            - name: Software
+              url: software/
+            - name: Talks
+              url: talks/
+            - name: Blog
+              url: blog/
             - name: Tags
               url: tags/
             - name: Archive
               url: archive/
-            - name: Blog
-              url: https://en.wikipedia.org/wiki/Moritz-Maria_von_Igelfeld_(character)
 
     socialIcons:
-        - name: CV
-          url: cv.pdf
         - name: Email
-          url: mailto:igelfeld@regensburg.edu
-        - name: Zoom
-          url: https://www.zoom.us/my/igelfeld
-        - name: Location
-          url: location/
-        - name: Office Hours
-          url: officehours/
-        - name: Google Scholar
-          url: https://scholar.google.com/citations?user=cL23w-4AAAAJ
+          url: mailto:thomas.hilder@monash.edu
         - name: GitHub
-          url: https://github.com/pmichaillat
-        - name: Substack
-          url: https://pmichaillat.substack.com
-        - name: YouTube
-          url: https://www.youtube.com/@pmichaillat
-        - name: Twitter
-          url: https://x.com/pmichaillat
+          url: https://github.com/tomhilder
+        - name: Google Scholar
+          url: https://scholar.google.com/citations?user=q0Ol5jsAAAAJ&hl=en
+        - name: ORCID
+          url: https://orcid.org/0000-0001-7641-5235
         - name: Bluesky
-          url: https://bsky.app/profile/pmichaillat.bsky.social
+          url: https://bsky.app/profile/tom-hilder.bsky.social
+        - name: YouTube
+          url: https://www.youtube.com/@tomhilder
 
     assets:
         disableScrollBarStyle: true
@@ -105,7 +90,7 @@ params:
         hiddenInList: false
         hiddenInSingle: true
     label:
-      text: "Moritz-Maria von Igelfeld"
+      text: "Tom Hilder"
       icon: favicon.ico
       iconHeight: 18
 
