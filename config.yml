@@ -82,7 +82,7 @@ params:
         - name: Bluesky
           url: https://bsky.app/profile/tom-hilder.bsky.social
         - name: YouTube
-          url: https://www.youtube.com/@tomhilder
+          url: "#"
 
     assets:
         disableScrollBarStyle: true
