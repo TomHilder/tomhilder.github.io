@@ -1,6 +1,7 @@
 baseURL: "https://tomhilder.github.io/"
 title: Tom Hilder
 theme: PaperMod
+ignoreFiles: ["README\\.md$", "README_TEMPLATE\\.md$"]
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
