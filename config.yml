@@ -13,17 +13,17 @@ taxonomies:
 
 menu:
     main:
-        - name: Research
-          url: research/
-          weight: 1
-        - name: Software
-          url: software/
-          weight: 2
-        - name: Talks
-          url: talks/
-          weight: 3
         - name: Blog
           url: blog/
+          weight: 1
+        - name: Research
+          url: research/
+          weight: 2
+        - name: Software
+          url: software/
+          weight: 3
+        - name: Talks
+          url: talks/
           weight: 4
         - name: About
           url: about/
@@ -61,14 +61,14 @@ params:
           imageWidth: 160
           imageHeight: 160
           buttons:
+            - name: Blog
+              url: blog/
             - name: Research
               url: research/
             - name: Software
               url: software/
             - name: Talks
               url: talks/
-            - name: Blog
-              url: blog/
             - name: About
               url: about/
 
