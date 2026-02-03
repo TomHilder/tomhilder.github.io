@@ -23,4 +23,5 @@ I am a PhD candidate at the School of Physics & Astronomy, Monash University.
 - **GitHub:** [tomhilder](https://github.com/tomhilder)
 - **Google Scholar:** [Profile](https://scholar.google.com/citations?user=q0Ol5jsAAAAJ&hl=en)
 - **ORCID:** [0000-0001-7641-5235](https://orcid.org/0000-0001-7641-5235)
+- **LinkedIn:** [thomas-hilder](https://www.linkedin.com/in/thomas-hilder-10623425a)
 - **Bluesky:** [@tom-hilder.bsky.social](https://bsky.app/profile/tom-hilder.bsky.social)

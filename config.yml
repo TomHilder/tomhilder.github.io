@@ -77,6 +77,8 @@ params:
           url: https://scholar.google.com/citations?user=q0Ol5jsAAAAJ&hl=en
         - name: ORCID
           url: https://orcid.org/0000-0001-7641-5235
+        - name: LinkedIn
+          url: https://www.linkedin.com/in/thomas-hilder-10623425a
         - name: Bluesky
           url: https://bsky.app/profile/tom-hilder.bsky.social
         - name: YouTube
