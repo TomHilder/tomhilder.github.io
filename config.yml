@@ -30,8 +30,8 @@ params:
     author: Tom Hilder
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
-    defaultTheme: light
-    hideFooter: false
+    defaultTheme: dark
+    hideFooter: true
     disableThemeToggle: true
     ShowShareButtons: false
     ShowReadingTime: false
@@ -65,10 +65,8 @@ params:
               url: talks/
             - name: Blog
               url: blog/
-            - name: Tags
-              url: tags/
-            - name: Archive
-              url: archive/
+            - name: About
+              url: about/
 
     socialIcons:
         - name: Email
