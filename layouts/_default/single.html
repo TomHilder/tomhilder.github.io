@@ -4,16 +4,26 @@
        Looks in the page bundle first, then assets/, then falls back to a
        static file. `portraitAlt` overrides the alt text. */}}
 {{- $portrait := "" }}
+{{- $portraitSize := 132 }}
 {{- with .Params.portrait }}
   {{- $res := ($.Resources.ByType "image").GetMatch (printf "*%s*" .) }}
   {{- if not $res }}{{ $res = resources.Get . }}{{ end }}
-  {{- if $res }}{{ $portrait = $res.Permalink }}{{ else }}{{ $portrait = . | relURL }}{{ end }}
+  {{- if $res }}
+    {{- $processable := slice "jpg" "jpeg" "png" "tif" "bmp" "gif" "webp" }}
+    {{- if in $processable $res.MediaType.SubType }}
+      {{- /* 2x for retina; Fill crops a non-square source to the circle */}}
+      {{- $res = $res.Fill (printf "%dx%d Center" (mul $portraitSize 2) (mul $portraitSize 2)) }}
+    {{- end }}
+    {{- $portrait = $res.Permalink }}
+  {{- else }}
+    {{- $portrait = . | relURL }}
+  {{- end }}
 {{- end }}
 
 <article class="post-single">
   <header class="post-header{{ if $portrait }} with-portrait{{ end }}">
     {{- with $portrait }}
-    <img class="page-portrait" src="{{ . }}" width="132" height="132"
+    <img class="page-portrait" src="{{ . }}" width="{{ $portraitSize }}" height="{{ $portraitSize }}"
          alt="{{ $.Params.portraitAlt | default $.Title }}">
     {{- end }}
     <div class="post-header-text">

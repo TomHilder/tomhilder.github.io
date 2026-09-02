@@ -2,7 +2,7 @@
 title: "About Me"
 author: " "
 description: "About Tom Hilder"
-portrait: "picture.png"
+portrait: "img/headshot.jpeg"
 portraitAlt: "Tom Hilder"
 ---
 

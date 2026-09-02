@@ -63,9 +63,10 @@ params:
           enabled: true
           title: Tom Hilder
           subtitle: "PhD Candidate at the School of Physics & Astronomy, Monash University. I study the ionised interstellar medium using computational statistics, particularly cutting-edge scalable Gaussian Process methods."
-          imageUrl: "picture.png"
-          imageWidth: 160
-          imageHeight: 160
+          imageUrl: "img/headshot.jpeg"
+          imageTitle: "Tom Hilder"
+          imageWidth: 176
+          imageHeight: 176
           buttons:
             - name: Blog
               url: blog/
