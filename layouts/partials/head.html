@@ -35,7 +35,7 @@
 {{- /* Fonts: Newsreader (serif display) + Inter (UI/body) */}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..600&family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300..600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
 
 {{- /* Styles */}}
 
@@ -91,10 +91,14 @@
 {{- end -}}
 
 {{- /* Favicons */}}
-<link rel="icon" href="{{ site.Params.assets.favicon | default "favicon.ico" | absURL }}">
-<link rel="icon" type="image/png" sizes="16x16" href="{{ site.Params.assets.favicon16x16 | default "favicon-16x16.png" | absURL }}">
-<link rel="icon" type="image/png" sizes="32x32" href="{{ site.Params.assets.favicon32x32 | default "favicon-32x32.png" | absURL }}">
-<link rel="apple-touch-icon" href="{{ site.Params.assets.apple_touch_icon | default "apple-touch-icon.png" | absURL }}">
+{{- /* ?v= busts the browser's very sticky favicon cache. Bump iconVersion
+       in config.yml whenever the icons change. */}}
+{{- $v := printf "?v=%s" (site.Params.iconVersion | default "1") }}
+<link rel="icon" type="image/svg+xml" href="{{ printf "favicon.svg%s" $v | absURL }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ printf "favicon-32x32.png%s" $v | absURL }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ printf "favicon-16x16.png%s" $v | absURL }}">
+<link rel="icon" href="{{ printf "favicon.ico%s" $v | absURL }}" sizes="any">
+<link rel="apple-touch-icon" href="{{ printf "apple-touch-icon.png%s" $v | absURL }}">
 {{- /* Browser chrome colour follows the active palette's ground */}}
 {{- $grounds := dict "observatory" "#0f1116" "ember" "#17140f" "nebula" "#0a0e17" "basalt" "#121314" "meridian" "#0b1412" "rosewood" "#150f14" "ultramarine" "#0a0f1e" "ink" "#0e0f12" "void" "#000000" "dusk" "#1b1f27" }}
 {{- $ground := (index $grounds (site.Params.palette | default "observatory")) | default "#0f1116" }}

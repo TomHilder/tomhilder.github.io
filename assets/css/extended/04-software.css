@@ -33,26 +33,33 @@
 .pkg-mark {
     width: 78px;
     height: 78px;
-    border-radius: 10px;
-    background: var(--surface);
-    border: 1px solid var(--line);
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    transition: transform 0.18s ease;
+}
+
+/* A real logo stands on its own. Only the monogram gets a well. */
+.pkg-mark.is-monogram {
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--line);
     transition: border-color 0.18s ease, transform 0.18s ease;
 }
 
 .pkg:hover .pkg-mark {
-    border-color: var(--line-strong);
     transform: translateY(-1px);
+}
+
+.pkg:hover .pkg-mark.is-monogram {
+    border-color: var(--line-strong);
 }
 
 .pkg-mark img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    padding: 7px;
+    padding: 0;
     margin: 0;
     border: 0;
     border-radius: 0;

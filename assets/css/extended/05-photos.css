@@ -24,6 +24,22 @@
     box-shadow: 0 14px 34px -20px rgba(0, 0, 0, 0.9);
 }
 
+/* Wide screens: hang the portrait out in the left margin, so the page title
+   lines up with the body text underneath it instead of being indented. */
+@media screen and (min-width: 1080px) {
+    .post-header.with-portrait {
+        display: block;
+        position: relative;
+    }
+
+    .post-header.with-portrait .page-portrait {
+        position: absolute;
+        top: -2px;
+        left: calc(-1 * (132px + 34px));
+        margin: 0;
+    }
+}
+
 /* Photos inside page content.
    Add #left, #right, #center or #small to the image URL in markdown to place
    one, e.g.  ![Me at the telescope](anglo-australian.jpg#right) */
@@ -66,6 +82,35 @@
     clear: both;
 }
 
+/* #aside pulls a photo out of the text column into the page margin on wide
+   screens, and tucks it back inside the column when there is no room.
+   For one with a caption, wrap it in <figure class="aside">. */
+.post-content img[src*="#aside"],
+.post-content figure.aside {
+    float: right;
+    width: 280px;
+    max-width: 42%;
+    margin: 6px 0 var(--space-m) var(--space-m);
+    clear: right;
+}
+
+.post-content figure.aside img {
+    width: 100%;
+    margin: 0;
+}
+
+.post-content figure.aside figcaption {
+    margin-top: 8px;
+}
+
+@media screen and (min-width: 1200px) {
+    .post-content img[src*="#aside"],
+    .post-content figure.aside {
+        max-width: none;
+        margin-inline-end: -240px;
+    }
+}
+
 /* Two or more photos side by side:
    <div class="photo-row"> ...two markdown images or <img> tags... </div> */
 .photo-row {
@@ -99,8 +144,11 @@
     }
 
     .post-content img[src*="#left"],
-    .post-content img[src*="#right"] {
+    .post-content img[src*="#right"],
+    .post-content img[src*="#aside"],
+    .post-content figure.aside {
         float: none;
+        width: 100%;
         max-width: 100%;
         margin-inline: 0;
     }

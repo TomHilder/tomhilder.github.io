@@ -96,8 +96,8 @@ a {
 
 .logo a {
     font-family: var(--font-serif);
-    font-size: 1.25rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 700;
     letter-spacing: var(--tracking-tight);
     color: var(--text);
     transition: color 0.15s ease;
@@ -112,8 +112,8 @@ a {
     height: 19px;
     width: auto;
     display: inline-block;
-    vertical-align: -2px;
-    margin-inline-end: 11px;
+    vertical-align: -1px;
+    margin-inline-end: 12px;
     color: var(--accent);
     transition: color 0.15s ease, transform 0.15s ease;
 }

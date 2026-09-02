@@ -48,7 +48,7 @@
 {{- with $p.Params.externalUrl }}{{ $href = . }}{{ $external = true }}{{ end }}
 
 <li class="pkg">
-  <div class="pkg-mark">
+  <div class="pkg-mark{{ if $mark }} has-logo{{ else }} is-monogram{{ end }}">
     {{- if $mark }}
     <img loading="lazy" src="{{ $mark }}" alt="{{ $p.Title }} logo">
     {{- else }}
