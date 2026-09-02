@@ -38,7 +38,7 @@
         {{- $mark = $res.Permalink }}
       {{- end }}
     {{- else }}
-      {{- $mark = . | absURL }}
+      {{- $mark = . | relURL }}
     {{- end }}
   {{- end }}
 {{- end }}

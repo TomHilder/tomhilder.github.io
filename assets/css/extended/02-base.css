@@ -172,7 +172,7 @@ a {
 .page-header h1,
 .post-title {
     font-size: var(--step-4);
-    font-weight: 400;
+    font-weight: 700;
     margin-bottom: 0;
     font-variation-settings: "opsz" 48;
 }

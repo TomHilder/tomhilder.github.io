@@ -7,7 +7,7 @@
 {{- with .Params.portrait }}
   {{- $res := ($.Resources.ByType "image").GetMatch (printf "*%s*" .) }}
   {{- if not $res }}{{ $res = resources.Get . }}{{ end }}
-  {{- if $res }}{{ $portrait = $res.Permalink }}{{ else }}{{ $portrait = . | absURL }}{{ end }}
+  {{- if $res }}{{ $portrait = $res.Permalink }}{{ else }}{{ $portrait = . | relURL }}{{ end }}
 {{- end }}
 
 <article class="post-single">
