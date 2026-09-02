@@ -20,60 +20,6 @@
 </div>
 {{- end }}
 
-<style>
-.software-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    margin-top: 20px;
-}
-
-.software-grid .post-entry {
-    flex: 0 0 calc(33.333% - 12px);
-    margin: 0;
-    min-width: 180px;
-    text-align: center;
-}
-
-.software-grid .entry-content {
-    display: none;
-}
-
-.software-grid .post-entry .entry-header {
-    padding: 8px 12px 12px;
-}
-
-.software-grid .post-entry .entry-header h2 {
-    font-size: 1rem;
-    margin: 0;
-}
-
-.software-grid .entry-cover {
-    padding: 8px;
-}
-
-.software-grid .entry-cover img {
-    max-height: 160px;
-    object-fit: contain;
-    background: var(--entry);
-}
-
-.software-grid .entry-footer {
-    display: none;
-}
-
-@media (max-width: 900px) {
-    .software-grid .post-entry {
-        flex: 0 0 calc(50% - 8px);
-    }
-}
-
-@media (max-width: 500px) {
-    .software-grid .post-entry {
-        flex: 0 0 100%;
-    }
-}
-</style>
 
 {{- $pages := union .RegularPages .Sections }}
 

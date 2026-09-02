@@ -1,0 +1,221 @@
+/* ==========================================================================
+   Palettes
+   Switch with `palette: observatory | ember | nebula` under params in
+   config.yml. baseof.html writes it to <html data-palette="...">.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   OBSERVATORY — cool slate-indigo night, warm brass accent.
+   Reads as an instrument panel: dark, quiet, one warm light source.
+   -------------------------------------------------------------------------- */
+[data-palette="observatory"] {
+    --bg: #0f1116;
+    --bg-deep: #0a0c10;
+    --surface: #161920;
+    --surface-2: #1c2029;
+    --line: #242932;
+    --line-strong: #343b47;
+    --text: #e7e4dd;
+    --text-dim: #a3a49f;
+    --text-faint: #6f747d;
+    --accent: #d3a25f;
+    --accent-hi: #eabd83;
+    --accent-soft: rgba(211, 162, 95, 0.14);
+    --glow-a: rgba(211, 162, 95, 0.10);
+    --glow-b: rgba(96, 124, 190, 0.13);
+}
+
+/* --------------------------------------------------------------------------
+   EMBER — warm near-black paper, ivory text, burnt-sienna accent.
+   The closest to the Anthropic feel: warm neutrals, one earthy hue.
+   -------------------------------------------------------------------------- */
+[data-palette="ember"] {
+    --bg: #17140f;
+    --bg-deep: #110f0b;
+    --surface: #1f1b15;
+    --surface-2: #27221b;
+    --line: #2f2921;
+    --line-strong: #453d31;
+    --text: #f0ece2;
+    --text-dim: #a9a294;
+    --text-faint: #766f62;
+    --accent: #c66a45;
+    --accent-hi: #e08b64;
+    --accent-soft: rgba(198, 106, 69, 0.15);
+    --glow-a: rgba(198, 106, 69, 0.13);
+    --glow-b: rgba(190, 150, 80, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   NEBULA — deep blue-black, aqua accent with a violet second light.
+   The most overtly astronomical of the three.
+   -------------------------------------------------------------------------- */
+[data-palette="nebula"] {
+    --bg: #0a0e17;
+    --bg-deep: #070a11;
+    --surface: #111726;
+    --surface-2: #171e30;
+    --line: #1e2740;
+    --line-strong: #2d3a5c;
+    --text: #e5e9f1;
+    --text-dim: #98a2b8;
+    --text-faint: #667089;
+    --accent: #79cfc4;
+    --accent-hi: #a2e5dc;
+    --accent-soft: rgba(121, 207, 196, 0.13);
+    --glow-a: rgba(121, 207, 196, 0.10);
+    --glow-b: rgba(139, 118, 240, 0.14);
+}
+
+/* --------------------------------------------------------------------------
+   BASALT — true neutral graphite, sage accent.
+   The quietest of the set. No hue in the ground at all; the only colour on
+   the page is the accent, and it is a muted one.
+   -------------------------------------------------------------------------- */
+[data-palette="basalt"] {
+    --bg: #121314;
+    --bg-deep: #0d0e0f;
+    --surface: #1a1b1d;
+    --surface-2: #202224;
+    --line: #282a2c;
+    --line-strong: #3b3e41;
+    --text: #e7e7e4;
+    --text-dim: #9e9f9c;
+    --text-faint: #6c6e6c;
+    --accent: #9bb894;
+    --accent-hi: #bcd3b5;
+    --accent-soft: rgba(155, 184, 148, 0.14);
+    --glow-a: rgba(155, 184, 148, 0.08);
+    --glow-b: rgba(200, 200, 190, 0.04);
+}
+
+/* --------------------------------------------------------------------------
+   MERIDIAN — deep petrol-teal ground, warm sand accent.
+   The strongest warm/cool tension in the set: a cold green-blue page with a
+   single desert-coloured light on it.
+   -------------------------------------------------------------------------- */
+[data-palette="meridian"] {
+    --bg: #0b1412;
+    --bg-deep: #071010;
+    --surface: #111d1a;
+    --surface-2: #162521;
+    --line: #1c2b27;
+    --line-strong: #2b423b;
+    --text: #e7ebe6;
+    --text-dim: #98a8a2;
+    --text-faint: #667571;
+    --accent: #ddb87b;
+    --accent-hi: #f2d3a3;
+    --accent-soft: rgba(221, 184, 123, 0.14);
+    --glow-a: rgba(221, 184, 123, 0.10);
+    --glow-b: rgba(52, 145, 125, 0.13);
+}
+
+/* --------------------------------------------------------------------------
+   ROSEWOOD — plum-black ground, dusty rose accent, violet second light.
+   Soft and unusual. The least "astronomy website" of the ten.
+   -------------------------------------------------------------------------- */
+[data-palette="rosewood"] {
+    --bg: #150f14;
+    --bg-deep: #100b10;
+    --surface: #1e161d;
+    --surface-2: #251c24;
+    --line: #2c212a;
+    --line-strong: #43323f;
+    --text: #efe8ec;
+    --text-dim: #aa9ca6;
+    --text-faint: #786c74;
+    --accent: #d98fa8;
+    --accent-hi: #f2b6c8;
+    --accent-soft: rgba(217, 143, 168, 0.15);
+    --glow-a: rgba(217, 143, 168, 0.12);
+    --glow-b: rgba(138, 92, 190, 0.11);
+}
+
+/* --------------------------------------------------------------------------
+   ULTRAMARINE — deep navy ground, citron accent.
+   The boldest colour pairing here: a saturated blue page against a yellow
+   that sits almost opposite it on the wheel.
+   -------------------------------------------------------------------------- */
+[data-palette="ultramarine"] {
+    --bg: #0a0f1e;
+    --bg-deep: #060a15;
+    --surface: #111831;
+    --surface-2: #16203d;
+    --line: #1d284b;
+    --line-strong: #2d3d6e;
+    --text: #e7eaf1;
+    --text-dim: #99a2b9;
+    --text-faint: #6c7591;
+    --accent: #d9d06b;
+    --accent-hi: #eee79c;
+    --accent-soft: rgba(217, 208, 107, 0.14);
+    --glow-a: rgba(217, 208, 107, 0.08);
+    --glow-b: rgba(66, 98, 212, 0.16);
+}
+
+/* --------------------------------------------------------------------------
+   INK — achromatic. Near-black blue-grey, bone-white accent.
+   There is no accent hue: emphasis is carried by light alone. The most
+   austere and the most typographic.
+   -------------------------------------------------------------------------- */
+[data-palette="ink"] {
+    --bg: #0e0f12;
+    --bg-deep: #0a0b0d;
+    --surface: #16171b;
+    --surface-2: #1c1e23;
+    --line: #23252a;
+    --line-strong: #383b42;
+    --text: #ecedef;
+    --text-dim: #9b9da3;
+    --text-faint: #6c6f76;
+    --accent: #ded5c3;
+    --accent-hi: #f2ebdd;
+    --accent-soft: rgba(222, 213, 195, 0.12);
+    --glow-a: rgba(222, 213, 195, 0.05);
+    --glow-b: rgba(255, 255, 255, 0.03);
+}
+
+/* --------------------------------------------------------------------------
+   VOID — true black ground, cold blue-white accent.
+   Highest contrast of the ten, and the only one that goes to #000. Looks
+   best on OLED; can feel harsh on a cheap panel.
+   -------------------------------------------------------------------------- */
+[data-palette="void"] {
+    --bg: #000000;
+    --bg-deep: #070709;
+    --surface: #0b0b0e;
+    --surface-2: #131317;
+    --line: #1d1d22;
+    --line-strong: #35353d;
+    --text: #f5f5f6;
+    --text-dim: #a0a0a6;
+    --text-faint: #6e6e75;
+    --accent: #86cdff;
+    --accent-hi: #b4e0ff;
+    --accent-soft: rgba(134, 205, 255, 0.14);
+    --glow-a: rgba(134, 205, 255, 0.09);
+    --glow-b: rgba(90, 110, 160, 0.07);
+}
+
+/* --------------------------------------------------------------------------
+   DUSK — lifted mid-dark blue-grey, muted mauve accent.
+   Deliberately low contrast. Nothing on the page is black and nothing is
+   white; the easiest of the ten to read for a long time.
+   -------------------------------------------------------------------------- */
+[data-palette="dusk"] {
+    --bg: #1b1f27;
+    --bg-deep: #161a21;
+    --surface: #232833;
+    --surface-2: #2a303c;
+    --line: #313745;
+    --line-strong: #454d5e;
+    --text: #dfe2e8;
+    --text-dim: #a7adba;
+    --text-faint: #7d8492;
+    --accent: #b9a3d4;
+    --accent-hi: #d2c1e8;
+    --accent-soft: rgba(185, 163, 212, 0.15);
+    --glow-a: rgba(185, 163, 212, 0.10);
+    --glow-b: rgba(120, 140, 190, 0.10);
+}

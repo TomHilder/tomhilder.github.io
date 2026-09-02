@@ -1,0 +1,361 @@
+/* ==========================================================================
+   Base: page chrome, typography, header, footer
+   ========================================================================== */
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: var(--step-0);
+    font-weight: 400;
+    line-height: var(--lineheight);
+    letter-spacing: -0.005em;
+    color: var(--text-dim);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    text-rendering: optimizeLegibility;
+}
+
+/* Two soft light sources so the background is never a flat slab. */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background:
+        radial-gradient(60rem 34rem at 8% -12%, var(--glow-b), transparent 62%),
+        radial-gradient(46rem 28rem at 96% 2%, var(--glow-a), transparent 62%);
+}
+
+/* Fine film grain. Kills banding, adds tooth. */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 450;
+    letter-spacing: var(--tracking-tight);
+    line-height: var(--lineheight-tight);
+    color: var(--text);
+    font-variation-settings: "opsz" 32;
+}
+
+a {
+    color: inherit;
+}
+
+::selection {
+    background: var(--accent-soft);
+    color: var(--text);
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+}
+
+/* --- Header ------------------------------------------------------------- */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    background: var(--bg);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    backdrop-filter: blur(14px) saturate(150%);
+    -webkit-backdrop-filter: blur(14px) saturate(150%);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav {
+    max-width: var(--nav-width);
+    background: none;
+    line-height: var(--header-height);
+    padding: 0 var(--gap);
+    gap: var(--space-m);
+}
+
+.logo,
+#menu {
+    margin: auto 0;
+}
+
+.logo a {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    letter-spacing: var(--tracking-tight);
+    color: var(--text);
+    transition: color 0.15s ease;
+}
+
+.logo a:hover {
+    color: var(--accent-hi);
+}
+
+.logo a img,
+.logo a svg {
+    border-radius: 4px;
+    margin-inline-end: 10px;
+    opacity: 0.9;
+}
+
+#menu {
+    gap: var(--space-m);
+}
+
+#menu li + li {
+    margin-inline-start: 0;
+}
+
+#menu a {
+    font-size: 0.875rem;
+    font-weight: 450;
+    letter-spacing: 0.005em;
+    color: var(--text-dim);
+    transition: color 0.15s ease;
+}
+
+#menu a:hover {
+    color: var(--text);
+}
+
+#menu .active {
+    color: var(--text);
+    border-bottom: 1px solid var(--accent);
+    padding-bottom: 3px;
+}
+
+/* --- Main --------------------------------------------------------------- */
+
+.main {
+    max-width: calc(var(--main-width) + var(--gap) * 2);
+    padding: var(--space-l) var(--gap) var(--space-xl);
+}
+
+.page-header,
+.post-header {
+    margin: 0 auto var(--space-l);
+    padding-bottom: var(--space-m);
+    border-bottom: 1px solid var(--line);
+}
+
+.page-header h1,
+.post-title {
+    font-size: var(--step-4);
+    font-weight: 400;
+    margin-bottom: 0;
+    font-variation-settings: "opsz" 48;
+}
+
+.post-title {
+    margin-bottom: var(--space-s);
+}
+
+.post-description,
+.post-meta,
+.breadcrumbs {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    color: var(--text-faint);
+    letter-spacing: 0;
+}
+
+.post-description {
+    margin-top: var(--space-s);
+    max-width: var(--measure);
+    color: var(--text-dim);
+}
+
+/* --- Long-form content -------------------------------------------------- */
+
+.post-content {
+    color: var(--text-dim);
+    font-size: var(--step-0);
+    line-height: var(--lineheight);
+    max-width: var(--measure);
+}
+
+.post-content > p:first-child {
+    font-size: var(--step-1);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.post-content h1 {
+    font-size: var(--step-4);
+    margin: var(--space-xl) 0 var(--space-m);
+}
+
+.post-content h2 {
+    font-size: var(--step-3);
+    margin: var(--space-l) 0 var(--space-m);
+}
+
+.post-content h3 {
+    font-size: var(--step-2);
+    margin: var(--space-l) 0 var(--space-s);
+}
+
+.post-content h4,
+.post-content h5 {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 560;
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-label);
+    color: var(--text-faint);
+    margin: var(--space-l) 0 var(--space-s);
+}
+
+.post-content h6 {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    color: var(--text-faint);
+}
+
+.post-content p,
+.post-content ul,
+.post-content ol,
+.post-content dl,
+.post-content figure {
+    margin-bottom: var(--space-m);
+}
+
+.post-content ol,
+.post-content ul {
+    margin-left: 0;
+    padding-inline-start: 1.25em;
+}
+
+.post-content li::marker {
+    color: var(--text-faint);
+}
+
+.post-content a,
+.post-meta a {
+    color: var(--text);
+    box-shadow: none;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+.post-content a:hover,
+.post-meta a:hover {
+    color: var(--accent-hi);
+    text-decoration-color: var(--accent-hi);
+}
+
+.post-content blockquote {
+    margin: var(--space-m) 0;
+    padding: 0 0 0 var(--space-m);
+    font-family: var(--font-serif);
+    font-size: var(--step-1);
+    font-style: italic;
+    color: var(--text-dim);
+    border-inline-start: 2px solid var(--accent);
+}
+
+.post-content hr {
+    height: 1px;
+    background: var(--line);
+    margin: var(--space-l) 0;
+}
+
+.post-content code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 5px;
+    padding: 2px 5px;
+    margin: 0 1px;
+}
+
+.post-content .highlight:not(table),
+.post-content pre {
+    border: 1px solid var(--line);
+    border-radius: var(--radius-s);
+    background: var(--bg-deep) !important;
+}
+
+.post-content pre code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    border: 0;
+    background: none;
+    padding: 14px 16px;
+}
+
+.post-content img {
+    border-radius: var(--radius-s);
+    border: 1px solid var(--line);
+    margin: var(--space-m) 0;
+}
+
+.post-content figure > figcaption {
+    font-family: var(--font-sans);
+    font-size: var(--step--1);
+    font-weight: 450;
+    color: var(--text-faint);
+    letter-spacing: 0;
+}
+
+.post-content table th {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: var(--tracking-label);
+    color: var(--text-faint);
+    border-bottom: 1px solid var(--line-strong);
+}
+
+.post-content table th,
+.post-content table td {
+    border-bottom: 1px solid var(--line);
+}
+
+/* --- Footer / post footer ----------------------------------------------- */
+
+.post-footer {
+    margin-top: var(--space-xl);
+}
+
+.post-tags a {
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    color: var(--text-faint);
+    font-size: var(--step--1);
+    line-height: 28px;
+    padding: 0 14px;
+    transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.post-tags a:hover {
+    background: none;
+    color: var(--text);
+    border-color: var(--line-strong);
+}
+
+.footer {
+    font-size: var(--footersize);
+    color: var(--text-faint);
+}

@@ -34,6 +34,10 @@ params:
     author: Tom Hilder
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
+    # Colour scheme (see assets/css/extended/01-palettes.css):
+    #   observatory | ember | nebula | basalt | meridian
+    #   rosewood | ultramarine | ink | void | dusk
+    palette: nebula
     defaultTheme: dark
     hideFooter: true
     disableThemeToggle: true
