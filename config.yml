@@ -32,8 +32,6 @@ menu:
 params:
     description: "Personal website of Tom Hilder, PhD Candidate at Monash University researching the ionised interstellar medium using computational statistics and scalable Gaussian Process methods."
     author: Tom Hilder
-    # Bump when the favicon changes, to defeat the browser icon cache
-    iconVersion: "3"
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
     # Colour scheme (see assets/css/extended/01-palettes.css):
