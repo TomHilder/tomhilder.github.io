@@ -188,64 +188,6 @@
     font-size: var(--step-4);
 }
 
-/* --- Software grid ------------------------------------------------------ */
-
-.software-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-    margin-top: var(--space-m);
-}
-
-.software-grid .post-entry {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 208px;
-    margin: 0;
-    padding: var(--space-m) var(--space-s);
-    text-align: center;
-}
-
-.software-grid .entry-content,
-.software-grid .entry-footer {
-    display: none;
-}
-
-.software-grid .entry-cover {
-    margin: 0 0 var(--space-m);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
-.software-grid .entry-cover img {
-    width: auto;
-    max-height: 118px;
-    max-width: 100%;
-    border: 0;
-    border-radius: 0;
-    margin: 0;
-    background: none;
-    object-fit: contain;
-    transition: transform 0.2s ease;
-}
-
-.software-grid .post-entry:hover .entry-cover img {
-    transform: scale(1.04);
-}
-
-.software-grid .post-entry .entry-header {
-    padding: 0;
-}
-
-.software-grid .post-entry .entry-header h2 {
-    font-size: 1rem;
-    margin: 0;
-}
-
 /* --- Pagination, archive, misc ------------------------------------------ */
 
 .pagination a {
@@ -299,12 +241,6 @@
 
 /* --- Responsive --------------------------------------------------------- */
 
-@media screen and (max-width: 900px) {
-    .software-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-}
-
 @media screen and (max-width: 768px) {
     :root {
         --gap: 20px;
@@ -331,11 +267,5 @@
 
     .nav {
         padding: 0 var(--gap);
-    }
-}
-
-@media screen and (max-width: 520px) {
-    .software-grid {
-        grid-template-columns: minmax(0, 1fr);
     }
 }

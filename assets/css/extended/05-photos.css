@@ -1,0 +1,107 @@
+/* ==========================================================================
+   Portraits and in-page photos
+   ========================================================================== */
+
+/* Page portrait, set with `portrait:` in a page's front matter.
+   Mirrors the home page treatment. */
+.post-header.with-portrait {
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 4vw, 36px);
+}
+
+.post-header.with-portrait .post-header-text {
+    min-width: 0;
+}
+
+.page-portrait {
+    flex: 0 0 auto;
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line-strong);
+    box-shadow: 0 14px 34px -20px rgba(0, 0, 0, 0.9);
+}
+
+/* Photos inside page content.
+   Add #left, #right, #center or #small to the image URL in markdown to place
+   one, e.g.  ![Me at the telescope](anglo-australian.jpg#right) */
+.post-content figure {
+    margin: var(--space-m) 0;
+}
+
+.post-content img[src*="#left"],
+.post-content img[src*="#right"] {
+    max-width: 46%;
+    margin-top: 5px;
+    margin-bottom: var(--space-s);
+}
+
+.post-content img[src*="#left"] {
+    float: left;
+    margin-inline-end: var(--space-m);
+}
+
+.post-content img[src*="#right"] {
+    float: right;
+    margin-inline-start: var(--space-m);
+}
+
+.post-content img[src*="#small"] {
+    max-width: 340px;
+}
+
+.post-content img[src*="#round"] {
+    border-radius: 50%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+/* Headings and rules never wrap around a floated photo */
+.post-content h1,
+.post-content h2,
+.post-content h3,
+.post-content hr {
+    clear: both;
+}
+
+/* Two or more photos side by side:
+   <div class="photo-row"> ...two markdown images or <img> tags... </div> */
+.photo-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin: var(--space-m) 0;
+    clear: both;
+}
+
+.photo-row img,
+.post-content .photo-row img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin: 0;
+}
+
+.photo-row p {
+    margin: 0;
+}
+
+@media screen and (max-width: 620px) {
+    .post-header.with-portrait {
+        gap: 20px;
+    }
+
+    .page-portrait {
+        width: 96px;
+        height: 96px;
+    }
+
+    .post-content img[src*="#left"],
+    .post-content img[src*="#right"] {
+        float: none;
+        max-width: 100%;
+        margin-inline: 0;
+    }
+}

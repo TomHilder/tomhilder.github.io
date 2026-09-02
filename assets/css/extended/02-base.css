@@ -96,7 +96,7 @@ a {
 
 .logo a {
     font-family: var(--font-serif);
-    font-size: 1.0625rem;
+    font-size: 1.25rem;
     font-weight: 500;
     letter-spacing: var(--tracking-tight);
     color: var(--text);
@@ -107,8 +107,23 @@ a {
     color: var(--accent-hi);
 }
 
-.logo a img,
-.logo a svg {
+/* Hexagon site mark, tinted by whichever palette is active */
+.site-mark {
+    height: 19px;
+    width: auto;
+    display: inline-block;
+    vertical-align: -2px;
+    margin-inline-end: 11px;
+    color: var(--accent);
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.logo a:hover .site-mark {
+    color: var(--accent-hi);
+    transform: translateY(-1px);
+}
+
+.logo a img {
     border-radius: 4px;
     margin-inline-end: 10px;
     opacity: 0.9;
@@ -123,7 +138,7 @@ a {
 }
 
 #menu a {
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 450;
     letter-spacing: 0.005em;
     color: var(--text-dim);

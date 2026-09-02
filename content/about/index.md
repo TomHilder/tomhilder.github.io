@@ -2,6 +2,8 @@
 title: "About Me"
 author: " "
 description: "About Tom Hilder"
+portrait: "picture.png"
+portraitAlt: "Tom Hilder"
 ---
 
 ## Bio

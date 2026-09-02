@@ -5,3 +5,5 @@ resources/
 
 # Reference materials
 reference/
+# macOS
+.DS_Store

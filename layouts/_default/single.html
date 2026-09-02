@@ -1,7 +1,22 @@
 {{- define "main" }}
 
+{{- /* Optional portrait: `portrait: "picture.png"` in front matter.
+       Looks in the page bundle first, then assets/, then falls back to a
+       static file. `portraitAlt` overrides the alt text. */}}
+{{- $portrait := "" }}
+{{- with .Params.portrait }}
+  {{- $res := ($.Resources.ByType "image").GetMatch (printf "*%s*" .) }}
+  {{- if not $res }}{{ $res = resources.Get . }}{{ end }}
+  {{- if $res }}{{ $portrait = $res.Permalink }}{{ else }}{{ $portrait = . | absURL }}{{ end }}
+{{- end }}
+
 <article class="post-single">
-  <header class="post-header">
+  <header class="post-header{{ if $portrait }} with-portrait{{ end }}">
+    {{- with $portrait }}
+    <img class="page-portrait" src="{{ . }}" width="132" height="132"
+         alt="{{ $.Params.portraitAlt | default $.Title }}">
+    {{- end }}
+    <div class="post-header-text">
     {{ partial "breadcrumbs.html" . }}
     <h1 class="post-title entry-hint-parent">
       {{ .Title }}
@@ -22,6 +37,7 @@
       {{- partial "post_canonical.html" . -}}
     </div>
     {{- end }}
+    </div>
   </header>
   {{- $isHidden := (.Param "cover.hiddenInSingle") | default (.Param "cover.hidden") | default false }}
   {{- partial "cover.html" (dict "cxt" . "IsSingle" true "isHidden" $isHidden) }}

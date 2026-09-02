@@ -99,8 +99,6 @@ params:
         hiddenInSingle: true
     label:
       text: "Tom Hilder"
-      icon: favicon.ico
-      iconHeight: 18
 
 markup:
     goldmark:

@@ -1,6 +1,5 @@
 {{- define "main" }}
 
-{{- if not .IsHome | and .Title }}
 <header class="page-header">
   {{- partial "breadcrumbs.html" . }}
   <h1>{{ .Title }}</h1>
@@ -10,7 +9,6 @@
   </div>
   {{- end }}
 </header>
-{{- end }}
 
 {{- if .Content }}
 <div class="post-content">
@@ -20,25 +18,74 @@
 </div>
 {{- end }}
 
-
 {{- $pages := union .RegularPages .Sections }}
 
-<div class="software-grid">
+<ul class="pkg-list">
 {{- range $pages }}
-<article class="post-entry">
-  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
-  <header class="entry-header">
-    <h2>{{- .Title }}</h2>
-  </header>
-  {{- if (ne (.Param "hideSummary") true) }}
-  <div class="entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape }}</p>
-  </div>
+{{- $p := . }}
+
+{{- /* Resolve the logo, if there is one, from the page bundle or global assets */}}
+{{- $mark := "" }}
+{{- with $p.Params.cover }}
+  {{- with .image }}
+    {{- $res := ($p.Resources.ByType "image").GetMatch (printf "*%s*" .) }}
+    {{- if not $res }}{{ $res = resources.Get . }}{{ end }}
+    {{- if $res }}
+      {{- $processable := slice "jpg" "jpeg" "png" "tif" "bmp" "gif" "webp" }}
+      {{- if and (in $processable $res.MediaType.SubType) (hugo.IsProduction) }}
+        {{- $mark = ($res.Resize "220x").Permalink }}
+      {{- else }}
+        {{- $mark = $res.Permalink }}
+      {{- end }}
+    {{- else }}
+      {{- $mark = . | absURL }}
+    {{- end }}
   {{- end }}
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ with .Params.externalUrl }}{{ . }}{{ else }}{{ .Permalink }}{{ end }}"{{ with .Params.externalUrl }} target="_blank" rel="noopener noreferrer"{{ end }}></a>
-</article>
 {{- end }}
-</div>
+
+{{- $href := $p.Permalink }}
+{{- $external := false }}
+{{- with $p.Params.externalUrl }}{{ $href = . }}{{ $external = true }}{{ end }}
+
+<li class="pkg">
+  <div class="pkg-mark">
+    {{- if $mark }}
+    <img loading="lazy" src="{{ $mark }}" alt="{{ $p.Title }} logo">
+    {{- else }}
+    <span class="pkg-monogram" aria-hidden="true">{{ substr $p.Title 0 1 }}</span>
+    {{- end }}
+  </div>
+
+  <div class="pkg-body">
+    <h2 class="pkg-name">{{ $p.Title }}</h2>
+    <p class="pkg-summary">{{ $p.Params.summary | default $p.Params.description | plainify }}</p>
+    {{- with $p.Params.tags }}
+    <ul class="pkg-tags">
+      {{- range . }}<li>{{ . }}</li>{{ end }}
+    </ul>
+    {{- end }}
+  </div>
+
+  <div class="pkg-go" aria-hidden="true">
+    {{- if $external }}
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+      <path d="M15 3h6v6"></path><path d="M10 14L21 3"></path>
+    </svg>
+    {{- else }}
+    <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14"></path><path d="M13 6l6 6-6 6"></path>
+    </svg>
+    {{- end }}
+  </div>
+
+  <a class="entry-link" href="{{ $href }}"
+     aria-label="{{ $p.Title }}{{ if $external }}, opens on GitHub{{ end }}"
+     {{- if $external }} target="_blank" rel="noopener noreferrer"{{ end }}></a>
+</li>
+{{- end }}
+</ul>
 
 {{- end }}{{- /* end main */ -}}
