@@ -1,0 +1,97 @@
+{{- define "main" }}
+
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- if .Description }}
+  <div class="post-description">
+    {{ .Description | markdownify }}
+  </div>
+  {{- end }}
+</header>
+
+{{- if .Content }}
+<div class="post-content">
+  {{- if not (.Param "disableAnchoredHeadings") }}
+  {{- partial "anchored_headings.html" .Content -}}
+  {{- else }}{{ .Content }}{{ end }}
+</div>
+{{- end }}
+
+{{- $paginator := .Paginate (union .RegularPages .Sections) }}
+
+{{- range $paginator.Pages }}
+{{- $p := . }}
+
+{{- /* Card thumbnail, from the page bundle or assets. To give a paper a real
+       figure, drop the image next to its index.md and set cover.image in the
+       front matter. Until then the placeholder below is drawn, so nothing
+       ever renders as a broken image. */}}
+{{- $thumb := "" }}
+{{- $alt := $p.Title }}
+{{- with $p.Params.cover }}
+  {{- with .image }}
+    {{- $res := ($p.Resources.ByType "image").GetMatch (printf "*%s*" .) }}
+    {{- if not $res }}{{ $res = resources.Get . }}{{ end }}
+    {{- if $res }}
+      {{- $processable := slice "jpg" "jpeg" "png" "tif" "bmp" "gif" "webp" }}
+      {{- if and (in $processable $res.MediaType.SubType) (hugo.IsProduction) }}
+        {{- $thumb = ($res.Fill "560x420 Center").Permalink }}
+      {{- else }}
+        {{- $thumb = $res.Permalink }}
+      {{- end }}
+    {{- else }}
+      {{- $thumb = . | relURL }}
+    {{- end }}
+  {{- end }}
+  {{- with .alt }}{{ $alt = . }}{{ end }}
+{{- end }}
+
+<article class="post-entry research-entry">
+  <div class="entry-thumb{{ if not $thumb }} is-placeholder{{ end }}">
+    {{- if $thumb }}
+    <img loading="lazy" src="{{ $thumb }}" alt="{{ $alt | plainify }}">
+    {{- else }}
+    <svg viewBox="0 0 22 19.32" aria-hidden="true" focusable="false">
+      <polygon points="21.00,9.66 16.00,18.32 6.00,18.32 1.00,9.66 6.00,1.00 16.00,1.00"
+               fill="none" stroke="currentColor" stroke-width="1.4"/>
+    </svg>
+    {{- end }}
+  </div>
+
+  <div class="entry-body">
+    <header class="entry-header">
+      <h2>{{ $p.Title }}</h2>
+    </header>
+    {{- if (ne ($p.Param "hideSummary") true) }}
+    <div class="entry-content">
+      <p>{{ $p.Summary | plainify | htmlUnescape }}{{ if $p.Truncated }}...{{ end }}</p>
+    </div>
+    {{- end }}
+    {{- if not ($p.Param "hideMeta") }}
+    <footer class="entry-footer">
+      {{- partial "post_meta.html" $p -}}
+    </footer>
+    {{- end }}
+  </div>
+
+  <a class="entry-link" aria-label="post link to {{ $p.Title | plainify }}"
+     href="{{ with $p.Params.externalUrl }}{{ . }}{{ else }}{{ $p.Permalink }}{{ end }}"
+     {{- with $p.Params.externalUrl }} target="_blank" rel="noopener noreferrer"{{ end }}></a>
+</article>
+{{- end }}
+
+{{- if gt $paginator.TotalPages 1 }}
+<footer class="page-footer">
+  <nav class="pagination">
+    {{- if $paginator.HasPrev }}
+    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">«&nbsp;{{ i18n "prev_page" }}</a>
+    {{- end }}
+    {{- if $paginator.HasNext }}
+    <a class="next" href="{{ $paginator.Next.URL | absURL }}">{{ i18n "next_page" }}&nbsp;»</a>
+    {{- end }}
+  </nav>
+</footer>
+{{- end }}
+
+{{- end }}{{- /* end main */ -}}
