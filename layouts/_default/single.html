@@ -4,7 +4,8 @@
        Looks in the page bundle first, then assets/, then falls back to a
        static file. `portraitAlt` overrides the alt text. */}}
 {{- $portrait := "" }}
-{{- $portraitSize := 132 }}
+{{- /* keep in step with --portrait-size in 05-photos.css */}}
+{{- $portraitSize := 172 }}
 {{- with .Params.portrait }}
   {{- $res := ($.Resources.ByType "image").GetMatch (printf "*%s*" .) }}
   {{- if not $res }}{{ $res = resources.Get . }}{{ end }}

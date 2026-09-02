@@ -16,6 +16,9 @@
 {{- if eq site.Params.defaultTheme `dark` -}}
 {{- print " dark" }}
 {{- end -}}
+{{- if .IsHome -}}
+{{- print " home" }}
+{{- end -}}
 " id="top">
     {{- if not .IsHome  }}
     {{- partialCached "header.html" . .Page -}}

@@ -4,6 +4,12 @@
 
 /* --- Home / profile mode ------------------------------------------------ */
 
+/* The hero is one row of photo plus text, so it needs more room than a
+   column of running prose. Without this the section links wrap. */
+body.home .main {
+    max-width: calc(880px + var(--gap) * 2);
+}
+
 .main .profile {
     align-items: center;
     justify-content: flex-start;

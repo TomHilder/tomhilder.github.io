@@ -4,6 +4,11 @@
 
 /* Page portrait, set with `portrait:` in a page's front matter.
    Mirrors the home page treatment. */
+:root {
+    --portrait-size: 172px;
+    --portrait-gutter: 34px;
+}
+
 .post-header.with-portrait {
     display: flex;
     align-items: center;
@@ -16,8 +21,8 @@
 
 .page-portrait {
     flex: 0 0 auto;
-    width: 132px;
-    height: 132px;
+    width: var(--portrait-size);
+    height: var(--portrait-size);
     border-radius: 50%;
     object-fit: cover;
     border: 1px solid var(--line-strong);
@@ -26,7 +31,7 @@
 
 /* Wide screens: hang the portrait out in the left margin, so the page title
    lines up with the body text underneath it instead of being indented. */
-@media screen and (min-width: 1080px) {
+@media screen and (min-width: 1180px) {
     .post-header.with-portrait {
         display: block;
         position: relative;
@@ -35,7 +40,7 @@
     .post-header.with-portrait .page-portrait {
         position: absolute;
         top: -2px;
-        left: calc(-1 * (132px + 34px));
+        left: calc(-1 * (var(--portrait-size) + var(--portrait-gutter)));
         margin: 0;
     }
 }
@@ -139,8 +144,7 @@
     }
 
     .page-portrait {
-        width: 96px;
-        height: 96px;
+        --portrait-size: 124px;
     }
 
     .post-content img[src*="#left"],
