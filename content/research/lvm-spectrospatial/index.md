@@ -5,6 +5,9 @@ tags: ["interstellar medium", "IFU", "spectroscopy", "optical", "Gaussian proces
 author: "Tom Hilder"
 description: "A unified spatial forward model for measuring weak emission lines in the ionised ISM using SDSS-V LVM data."
 summary: "We built and demonstrated a new class of models for IFU analysis that use accelerated Gaussian processes to incorporate the spatial information. We applied the technique to Local Volume Mapper data of the Rosette nebula, and presented maps of emission lines well below the (per-spaxel) noise floor."
+editPost:
+    URL: "https://doi.org/10.3847/1538-4357/ae274b"
+    Text: "ApJ"
 
 ---
 
