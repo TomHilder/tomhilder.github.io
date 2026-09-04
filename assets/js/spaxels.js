@@ -28,6 +28,7 @@
     var POINTY = false;
     var FILL = 0.9;         // hex size vs. cell; < 1 leaves fibre gaps
     var SEAL = 1.05;        // and > 1 closes them again once resolved
+    var NOISE = 0.11;       // per-spaxel read noise, fraction of full scale
     var DEAD_FRAC = 0.055;  // dead fibres
     var PAIR_FRAC = 0.4;    // how often a dead fibre takes its neighbour too
 
@@ -194,7 +195,7 @@
                 if (!n) continue;
 
                 // Read noise is close enough to achromatic: one draw per spaxel.
-                var noise = gauss() * 0.075 * 255;
+                var noise = gauss() * NOISE * 255;
                 tiles.push({
                     x: x,
                     y: y,
