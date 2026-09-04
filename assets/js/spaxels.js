@@ -20,7 +20,7 @@
     /* --- tuning -------------------------------------------------------- */
 
     var DWELL_MS = 2600;    // active viewing before the reveal starts
-    var PITCH = 17;         // target fibre pitch, CSS px
+    var PITCH = 11;         // target fibre pitch, CSS px
     var MIN_ROWS = 4;       // lattice rows from the bundle centre to its edge
     /* Spaxel orientation. Turned 30 degrees from the bundle reads better at
        the size this is actually viewed at, so this wants to be the opposite
@@ -34,11 +34,12 @@
     var INFER_STAGGER = 450; // phase 1: dead spaxels are filled in
     var INFER_TILE = 400;
     var HOLD_MS = 500;       // phase 2: a beat to take in the complete mosaic
-    var WAVE_MS = 1000;      // phase 3: spaxels resolve, centre outwards,
-    var SEAL_MS = 300;       //          each one over this long
+    var SCATTER_MS = 1000;   // phase 3: spaxels resolve in a random order,
+    var SEAL_MS = 300;       //          spread over this long, each one
+                             //          taking SEAL_MS to seal
 
     var INFER_MS = INFER_STAGGER + INFER_TILE;
-    var TOTAL_MS = INFER_MS + HOLD_MS + WAVE_MS + SEAL_MS + 80;
+    var TOTAL_MS = INFER_MS + HOLD_MS + SCATTER_MS + SEAL_MS + 80;
 
     var VISIBLE_RATIO = 0.45;
     var ROOT3 = Math.sqrt(3);
@@ -194,7 +195,6 @@
 
                 // Read noise is close enough to achromatic: one draw per spaxel.
                 var noise = gauss() * 0.075 * 255;
-                var dist = Math.sqrt((x - midX) * (x - midX) + (y - midY) * (y - midY));
                 tiles.push({
                     x: x,
                     y: y,
@@ -204,7 +204,7 @@
                     dead: false,
                     nb: [],
                     delay: Math.random() * INFER_STAGGER,
-                    wave: clamp01(dist / bundleA) * WAVE_MS
+                    turn: Math.random() * SCATTER_MS
                 });
             }
         }
@@ -289,9 +289,9 @@
                 var any = false;
                 for (var i = 0; i < tiles.length; i++) {
                     var t = tiles[i];
-                    if (resolveT <= t.wave) continue;
+                    if (resolveT <= t.turn) continue;
                     any = true;
-                    var grow = ease((resolveT - t.wave) / SEAL_MS);
+                    var grow = ease((resolveT - t.turn) / SEAL_MS);
                     addHex(ctx, t.x, t.y, R * (FILL + (SEAL - FILL) * grow), spaxelTurn);
                 }
                 if (any) {
@@ -304,7 +304,7 @@
             // Everything that has not: flat spaxel colour, or an empty socket.
             for (var j = 0; j < tiles.length; j++) {
                 var s = tiles[j];
-                if (resolveT > s.wave) continue;
+                if (resolveT > s.turn) continue;
 
                 var filled = s.dead ? ease((elapsed - s.delay) / INFER_TILE) : 1;
 
