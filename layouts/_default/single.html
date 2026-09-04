@@ -24,7 +24,7 @@
 <article class="post-single">
   <header class="post-header{{ if $portrait }} with-portrait{{ end }}">
     {{- with $portrait }}
-    <img class="page-portrait" src="{{ . }}" width="{{ $portraitSize }}" height="{{ $portraitSize }}"
+    <img class="page-portrait" data-spaxel src="{{ . }}" width="{{ $portraitSize }}" height="{{ $portraitSize }}"
          alt="{{ $.Params.portraitAlt | default $.Title }}">
     {{- end }}
     <div class="post-header-text">

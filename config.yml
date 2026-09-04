@@ -38,6 +38,9 @@ params:
     #   observatory | ember | nebula | basalt | meridian
     #   rosewood | ultramarine | ink | void | dusk
     palette: nebula
+    # The portrait arrives as IFU spaxels and resolves into the photograph
+    # (assets/js/spaxels.js). Set false to serve the plain photo instead.
+    portraitReveal: true
     defaultTheme: dark
     hideFooter: true
     disableThemeToggle: true

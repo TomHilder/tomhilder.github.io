@@ -90,6 +90,16 @@
 </script>
 {{- end }}
 
+{{- /* Portrait reveal. `portraitReveal: false` in config.yml turns it off.
+       Tested with isset rather than `default` because Hugo's `default`
+       treats an explicit false as empty and would hand back true. */}}
+{{- $reveal := true }}
+{{- if isset site.Params "portraitreveal" }}{{ $reveal = site.Params.portraitReveal }}{{ end }}
+{{- if $reveal }}
+{{- $spaxels := resources.Get "js/spaxels.js" | resources.Minify | fingerprint }}
+<script defer crossorigin="anonymous" src="{{ $spaxels.RelPermalink }}" integrity="{{ $spaxels.Data.Integrity }}"></script>
+{{- end }}
+
 {{- if (and (eq .Kind "page") (ne .Layout "archives") (ne .Layout "search") (.Param "ShowCodeCopyButtons")) }}
 <script>
     document.querySelectorAll('pre > code').forEach((codeblock) => {

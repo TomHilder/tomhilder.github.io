@@ -21,10 +21,10 @@
                 {{- $h := .imageHeight | default $w }}
                 {{- $img = $img.Fill (printf "%dx%d Center" (mul $w 2) (mul $h 2)) }}
             {{- end }}
-            <img draggable="false" src="{{ $img.Permalink }}" alt="{{ .imageTitle | default "profile image" }}" title="{{ .imageTitle }}"
+            <img draggable="false" data-spaxel src="{{ $img.Permalink }}" alt="{{ .imageTitle | default "profile image" }}" title="{{ .imageTitle }}"
                 height="{{ .imageHeight | default 150 }}" width="{{ .imageWidth | default 150 }}" />
         {{- else }}
-        <img draggable="false" src="{{ .imageUrl | relURL }}" alt="{{ .imageTitle | default "profile image" }}" title="{{ .imageTitle }}"
+        <img draggable="false" data-spaxel src="{{ .imageUrl | relURL }}" alt="{{ .imageTitle | default "profile image" }}" title="{{ .imageTitle }}"
             height="{{ .imageHeight | default 150 }}" width="{{ .imageWidth | default 150 }}" />
         {{- end }}
         </div>
