@@ -69,9 +69,9 @@
 
     // Appends to the current path; the caller owns beginPath, so a run of
     // these can be unioned into one clip.
-    function addHex(ctx, x, y, r) {
+    function addHex(ctx, x, y, r, turn) {
         for (var k = 0; k < 6; k++) {
-            var a = k * Math.PI / 3 + (POINTY ? Math.PI / 6 : 0);
+            var a = k * Math.PI / 3 + turn;
             var px = x + r * Math.cos(a);
             var py = y + r * Math.sin(a);
             if (k) ctx.lineTo(px, py); else ctx.moveTo(px, py);
@@ -144,6 +144,7 @@
         var pitch = inradius / (rows * vunit);
         var R = pitch / ROOT3;
         var rot = POINTY ? Math.PI / 6 : 0;
+        var spaxelTurn = rot;
         var a1x = pitch * Math.cos(rot + Math.PI / 6);
         var a1y = pitch * Math.sin(rot + Math.PI / 6);
         var a2x = pitch * Math.cos(rot + Math.PI / 2);
@@ -152,11 +153,12 @@
         var sampleR = R * 0.75;
         var step = Math.max(1, Math.round(sampleR / 2));
 
-        /* Grow the bundle by one spaxel circumradius to pick up every spaxel
-           that overlaps it; the CSS clip then trims the overhang, the way a
-           real bundle mask would. `along` runs toward a bundle vertex,
-           `across` toward the middle of an edge. */
-        var bundleA = Math.max(W, H) / 2 + R;
+        /* Grow the bundle enough to pick up every spaxel that overlaps it —
+           1.2 circumradii covers it whichever way the two are turned
+           relative to each other — and let the CSS clip trim the overhang,
+           the way a real bundle mask would. `along` runs toward a bundle
+           vertex, `across` toward the middle of an edge. */
+        var bundleA = Math.max(W, H) / 2 + R * 1.2;
         var bundleB = bundleA * ROOT3 / 2;
         function inBundle(x, y) {
             var px = Math.abs(x - midX), py = Math.abs(y - midY);
@@ -290,7 +292,7 @@
                     if (resolveT <= t.wave) continue;
                     any = true;
                     var grow = ease((resolveT - t.wave) / SEAL_MS);
-                    addHex(ctx, t.x, t.y, R * (FILL + (SEAL - FILL) * grow));
+                    addHex(ctx, t.x, t.y, R * (FILL + (SEAL - FILL) * grow), spaxelTurn);
                 }
                 if (any) {
                     ctx.clip();
@@ -311,13 +313,13 @@
                     ctx.strokeStyle = line;
                     ctx.lineWidth = stroke;
                     ctx.beginPath();
-                    addHex(ctx, s.x, s.y, hexR);
+                    addHex(ctx, s.x, s.y, hexR, spaxelTurn);
                     ctx.stroke();
                 }
 
                 if (filled > 0) {
                     ctx.beginPath();
-                    addHex(ctx, s.x, s.y, hexR);
+                    addHex(ctx, s.x, s.y, hexR, spaxelTurn);
                     ctx.globalAlpha = filled;
                     ctx.fillStyle = s.css;
                     ctx.fill();

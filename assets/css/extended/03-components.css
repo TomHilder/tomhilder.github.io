@@ -57,7 +57,7 @@ body.home .main {
 }
 
 .profile .portrait-frame {
-    filter: var(--hex-hairline) drop-shadow(0 16px 28px rgba(0, 0, 0, 0.55));
+    filter: drop-shadow(0 16px 28px rgba(0, 0, 0, 0.55));
 }
 
 .profile-text {

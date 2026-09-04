@@ -48,14 +48,6 @@
     /* Which way the portrait sits. The box has to match: flat-top wants a
        box sqrt(3)/2 as tall as it is wide, pointy-top the reverse. */
     --hex-clip: var(--hex-pointy);
-    /* A hairline that follows a clip path. `border` and `outline` trace the
-       box, so they would survive only along the flat edges; drop-shadow
-       follows the clipped silhouette, and four tight offsets make a ring. */
-    --hex-hairline:
-        drop-shadow(1px 0 0 var(--line-strong))
-        drop-shadow(-1px 0 0 var(--line-strong))
-        drop-shadow(0 1px 0 var(--line-strong))
-        drop-shadow(0 -1px 0 var(--line-strong));
     --radius: 12px;
     --radius-s: 8px;
 

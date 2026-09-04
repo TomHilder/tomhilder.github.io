@@ -9,6 +9,8 @@
     /* the hexagon's own aspect: a pointy-top one is the taller way up */
     --portrait-height: calc(var(--portrait-size) / 0.8660254);
     --portrait-gutter: 34px;
+    --portrait-ring: 2px;
+    --portrait-ring-color: var(--line-strong);
 }
 
 .post-header.with-portrait {
@@ -33,10 +35,25 @@
    after filter and would otherwise trim them off with everything else
    outside the hexagon. */
 .portrait-frame {
+    position: relative;
     display: inline-block;
     flex: 0 0 auto;
     line-height: 0;
-    filter: var(--hex-hairline) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.55));
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.55));
+}
+
+/* The outline is its own element, a slightly larger hexagon sitting behind
+   the portrait so only its rim shows. Drawing it here rather than as a
+   shadow of the portrait means the canvas and the photograph cannot render
+   it differently: it is the same element throughout, and its weight is a
+   single number. */
+.portrait-frame::before {
+    content: "";
+    position: absolute;
+    inset: calc(-1 * var(--portrait-ring));
+    clip-path: var(--hex-clip);
+    background: var(--portrait-ring-color);
+    z-index: -1;
 }
 
 /* Wide screens: hang the portrait out in the left margin, so the page title
