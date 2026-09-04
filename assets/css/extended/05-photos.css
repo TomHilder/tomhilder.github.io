@@ -8,7 +8,7 @@
     --portrait-size: 179px;
     /* the hexagon's own aspect: a pointy-top one is the taller way up */
     --portrait-height: calc(var(--portrait-size) / 0.8660254);
-    --portrait-gutter: 34px;
+    --portrait-gutter: 48px;
     --portrait-ring: 2px;
     --portrait-ring-color: var(--line-strong);
 }
