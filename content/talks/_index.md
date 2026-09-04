@@ -1,4 +1,4 @@
 ---
 title: "Talks"
-description: "Conference talks and presentations"
+# description: "Conference talks and presentations"
 ---

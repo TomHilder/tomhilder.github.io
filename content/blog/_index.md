@@ -1,4 +1,4 @@
 ---
 title: "Blog"
-description: "Blog posts by Tom Hilder"
+# description: "Blog posts by Tom Hilder"
 ---

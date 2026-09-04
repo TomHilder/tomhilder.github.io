@@ -1,6 +1,6 @@
 ---
 title: "Research"
-description: "Research papers and publications by Tom Hilder"
+# description: "Research papers and publications by Tom Hilder"
 ---
 
 #### Links
@@ -10,5 +10,3 @@ description: "Research papers and publications by Tom Hilder"
 <!-- ## Projects -->
 
 ---
-
-Writing about research projects. Either in-progress, complete, or published.

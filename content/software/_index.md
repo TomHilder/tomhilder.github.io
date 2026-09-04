@@ -1,4 +1,4 @@
 ---
 title: "Software"
-description: "Software projects and tools by Tom Hilder"
+# description: "Open source software"
 ---
