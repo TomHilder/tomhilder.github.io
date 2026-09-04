@@ -1,11 +1,11 @@
 /* Portrait reveal.
  *
  * The headshot first arrives as if it had been observed by an integral field
- * unit: hexagonal spaxels on a fibre pitch, per-spaxel read noise, and a
+ * unit: a hexagonal bundle of hexagonal spaxels, per-spaxel read noise, and a
  * scatter of dead fibres. Once somebody has actually been looking at the page
- * for a few seconds, the dead spaxels are filled in and the mosaic resolves
- * into the photograph — the way a spectrospatial model infers the truth
- * behind the data.
+ * for a few seconds the dead spaxels are inferred back in, and then each
+ * spaxel resolves into its real pixels and grows just past the fibre gap, so
+ * the mosaic knits into the photograph.
  *
  * Progressive enhancement throughout: the markup is a plain <img>, and if this
  * script never loads, bails, or hits an error, that photograph is simply what
@@ -20,23 +20,28 @@
     /* --- tuning -------------------------------------------------------- */
 
     var DWELL_MS = 2600;    // active viewing before the reveal starts
-    var PITCH = 13;         // target spaxel pitch, CSS px
-    var MIN_ACROSS = 11;
-    var MAX_ACROSS = 20;
+    var PITCH = 17;         // target fibre pitch, CSS px
+    var MIN_ROWS = 4;       // lattice rows from the bundle centre to its edge
+    /* Spaxel orientation. Turned 30 degrees from the bundle reads better at
+       the size this is actually viewed at, so this wants to be the opposite
+       of whichever way --hex-clip has the portrait facing. */
+    var POINTY = false;
     var FILL = 0.9;         // hex size vs. cell; < 1 leaves fibre gaps
-    var DEAD_FRAC = 0.05;   // scattered dead fibres
-    var DEAD_PATCHES = 2;   // plus a couple of clustered failures
-    var NOISE = 0.075;      // per-spaxel read noise, fraction of full scale
+    var SEAL = 1.05;        // and > 1 closes them again once resolved
+    var DEAD_FRAC = 0.055;  // dead fibres
+    var PAIR_FRAC = 0.4;    // how often a dead fibre takes its neighbour too
 
     var INFER_STAGGER = 450; // phase 1: dead spaxels are filled in
     var INFER_TILE = 400;
-    var WAVE_MS = 900;       // phase 2: the mosaic dissolves into the photo,
-    var RESOLVE_TILE = 520;  //          as a wave running out from the centre
+    var HOLD_MS = 500;       // phase 2: a beat to take in the complete mosaic
+    var WAVE_MS = 1000;      // phase 3: spaxels resolve, centre outwards,
+    var SEAL_MS = 300;       //          each one over this long
 
     var INFER_MS = INFER_STAGGER + INFER_TILE;
-    var TOTAL_MS = INFER_MS + WAVE_MS + RESOLVE_TILE + 80;
+    var TOTAL_MS = INFER_MS + HOLD_MS + WAVE_MS + SEAL_MS + 80;
 
     var VISIBLE_RATIO = 0.45;
+    var ROOT3 = Math.sqrt(3);
 
     /* --- helpers ------------------------------------------------------- */
 
@@ -58,10 +63,15 @@
         return v < 0 ? 0 : v > 255 ? 255 : Math.round(v);
     }
 
-    function hexPath(ctx, x, y, r) {
-        ctx.beginPath();
+    function pick(list) {
+        return list[Math.floor(Math.random() * list.length)];
+    }
+
+    // Appends to the current path; the caller owns beginPath, so a run of
+    // these can be unioned into one clip.
+    function addHex(ctx, x, y, r) {
         for (var k = 0; k < 6; k++) {
-            var a = k * Math.PI / 3;   // flat-top, matching the site mark
+            var a = k * Math.PI / 3 + (POINTY ? Math.PI / 6 : 0);
             var px = x + r * Math.cos(a);
             var py = y + r * Math.sin(a);
             if (k) ctx.lineTo(px, py); else ctx.moveTo(px, py);
@@ -106,30 +116,63 @@
             return;
         }
 
-        /* Hexagonal fibre bundle over the portrait. Flat-top hexes of
-           circumradius R tile at 1.5R horizontally and R*sqrt(3) vertically,
-           with alternate columns offset by half a row. */
-        var across = Math.max(MIN_ACROSS,
-            Math.min(MAX_ACROSS, Math.round(w / PITCH)));
-        var R = W / (1.5 * across + 0.5);
-        var colStep = 1.5 * R;
-        var rowStep = Math.sqrt(3) * R;
+        /* Fibres sit on a triangular lattice at `pitch` centre to centre, and
+           each spaxel is that lattice point's cell: a hexagon of circumradius
+           pitch/sqrt(3). Rotating the cells 30 degrees rotates the lattice
+           with them, so both orientations come from one pair of basis
+           vectors 60 degrees apart.
+
+           A hexagon cannot be tiled by smaller hexagons, so the bundle edge
+           is always stepped. What it can be is *in phase*: pick the pitch so
+           a whole number of fibre rows spans the bundle's inradius and the
+           edge falls along spaxel edges, cutting alternate ones cleanly in
+           half instead of shaving every one of them by some random amount.
+           The lattice is centred on the bundle centre and both have six-fold
+           symmetry, so putting one edge in phase does all six. */
+        /* The bundle is the hexagon the element is clipped to in CSS, so its
+           orientation follows the box: taller than wide means pointy-top.
+           Its inradius — centre to the middle of a flat edge — is then the
+           short half-axis whichever way up it is. */
+        var bundlePointy = H > W;
+        var inradius = Math.min(W, H) / 2;
+        /* Lattice step perpendicular to a bundle edge, as a fraction of the
+           pitch: half a pitch when spaxels and bundle face the same way,
+           sqrt(3)/2 when they are turned 30 degrees from each other. */
+        var vunit = (POINTY === bundlePointy) ? 0.5 : ROOT3 / 2;
+        var rows = Math.max(MIN_ROWS,
+            Math.round(inradius / (PITCH * dpr * vunit)));
+        var pitch = inradius / (rows * vunit);
+        var R = pitch / ROOT3;
+        var rot = POINTY ? Math.PI / 6 : 0;
+        var a1x = pitch * Math.cos(rot + Math.PI / 6);
+        var a1y = pitch * Math.sin(rot + Math.PI / 6);
+        var a2x = pitch * Math.cos(rot + Math.PI / 2);
+        var a2y = pitch * Math.sin(rot + Math.PI / 2);
         var midX = W / 2, midY = H / 2;
-        var radius = W / 2;
         var sampleR = R * 0.75;
         var step = Math.max(1, Math.round(sampleR / 2));
 
-        var tiles = [];
-        var cols = Math.ceil((W + 2 * R) / colStep) + 1;
-        var rows = Math.ceil((H + 2 * rowStep) / rowStep) + 1;
+        /* Grow the bundle by one spaxel circumradius to pick up every spaxel
+           that overlaps it; the CSS clip then trims the overhang, the way a
+           real bundle mask would. `along` runs toward a bundle vertex,
+           `across` toward the middle of an edge. */
+        var bundleA = Math.max(W, H) / 2 + R;
+        var bundleB = bundleA * ROOT3 / 2;
+        function inBundle(x, y) {
+            var px = Math.abs(x - midX), py = Math.abs(y - midY);
+            var along = bundlePointy ? py : px;
+            var across = bundlePointy ? px : py;
+            return across <= bundleB && along / bundleA + across / (2 * bundleB) <= 1;
+        }
 
-        for (var ci = 0; ci < cols; ci++) {
-            var x = -R + ci * colStep;
-            var yOff = (ci % 2) ? rowStep / 2 : 0;
-            for (var ri = 0; ri < rows; ri++) {
-                var y = -rowStep + yOff + ri * rowStep;
-                var dist = Math.sqrt((x - midX) * (x - midX) + (y - midY) * (y - midY));
-                if (dist > radius + R) continue;
+        var tiles = [];
+        var reach = Math.ceil(W / pitch) + 2;
+
+        for (var ci = -reach; ci <= reach; ci++) {
+            for (var ri = -reach; ri <= reach; ri++) {
+                var x = midX + ci * a1x + ri * a2x;
+                var y = midY + ci * a1y + ri * a2y;
+                if (!inBundle(x, y)) continue;
 
                 var rt = 0, gt = 0, bt = 0, n = 0;
                 var y0 = Math.round(y - sampleR), y1 = y + sampleR;
@@ -148,36 +191,68 @@
                 if (!n) continue;
 
                 // Read noise is close enough to achromatic: one draw per spaxel.
-                var noise = gauss() * NOISE * 255;
+                var noise = gauss() * 0.075 * 255;
+                var dist = Math.sqrt((x - midX) * (x - midX) + (y - midY) * (y - midY));
                 tiles.push({
                     x: x,
                     y: y,
                     css: "rgb(" + byte(rt / n + noise) + "," +
                         byte(gt / n + noise) + "," +
                         byte(bt / n + noise) + ")",
-                    dead: Math.random() < DEAD_FRAC,
+                    dead: false,
+                    nb: [],
                     delay: Math.random() * INFER_STAGGER,
-                    wave: clamp01(dist / (radius + R)) * WAVE_MS
+                    wave: clamp01(dist / bundleA) * WAVE_MS
                 });
             }
         }
         if (!tiles.length) return;
 
-        // A couple of clustered failures, which is how fibres actually die.
-        for (var p = 0; p < DEAD_PATCHES; p++) {
-            var seed = tiles[Math.floor(Math.random() * tiles.length)];
-            var reach = R * (1.4 + Math.random());
-            for (var q = 0; q < tiles.length; q++) {
-                var t = tiles[q];
-                var ddx = t.x - seed.x, ddy = t.y - seed.y;
-                if (Math.sqrt(ddx * ddx + ddy * ddy) <= reach) t.dead = true;
+        /* Kill some fibres. The six neighbours of a hex sit at exactly
+           sqrt(3)*R, so adjacency is a distance test with a little slack. */
+        var near = R * ROOT3 * 1.12;
+        for (var a1 = 0; a1 < tiles.length; a1++) {
+            for (var a2 = a1 + 1; a2 < tiles.length; a2++) {
+                var ax = tiles[a1].x - tiles[a2].x, ay = tiles[a1].y - tiles[a2].y;
+                if (Math.sqrt(ax * ax + ay * ay) <= near) {
+                    tiles[a1].nb.push(tiles[a2]);
+                    tiles[a2].nb.push(tiles[a1]);
+                }
+            }
+        }
+
+        function deadNeighbours(t) {
+            var c = 0;
+            for (var k = 0; k < t.nb.length; k++) if (t.nb[k].dead) c++;
+            return c;
+        }
+
+        /* Singles and pairs only, never a bigger blob: a fibre can only die
+           if nothing beside it is already dead, and can only take a
+           neighbour whose sole dead neighbour is itself. */
+        var target = Math.round(tiles.length * DEAD_FRAC);
+        for (var placed = 0, guard = 0; placed < target && guard < target * 60; guard++) {
+            var seed = pick(tiles);
+            if (seed.dead || deadNeighbours(seed)) continue;
+            seed.dead = true;
+            placed++;
+            if (Math.random() >= PAIR_FRAC) continue;
+            var mates = [];
+            for (var m = 0; m < seed.nb.length; m++) {
+                if (!seed.nb[m].dead && deadNeighbours(seed.nb[m]) === 1) {
+                    mates.push(seed.nb[m]);
+                }
+            }
+            if (mates.length) {
+                pick(mates).dead = true;
+                placed++;
             }
         }
 
         /* The canvas stands in for the <img> while the portrait resolves. It
            copies the class list so every rule that shaped the photograph —
-           the circle, the border, the absolute placement in the left margin
-           on the About page — applies to it unchanged. */
+           the hexagonal clip, the shadow, the absolute placement in the left
+           margin on the About page — applies to it unchanged. */
         var canvas = document.createElement("canvas");
         canvas.className = img.className + " spaxel-canvas";
         canvas.width = W;
@@ -201,40 +276,55 @@
             ctx.fillStyle = ground;
             ctx.fillRect(0, 0, W, H);
 
-            var resolveT = elapsed - INFER_MS;
-            if (resolveT > 0) ctx.drawImage(img, ox, oy, dw, dh);
+            var resolveT = elapsed - INFER_MS - HOLD_MS;
 
-            for (var i = 0; i < tiles.length; i++) {
-                var t = tiles[i];
+            /* Everything that has resolved shows its real pixels, inside a
+               hexagon grown just past the fibre gap so neighbours meet and
+               the seams disappear. One clip and one draw for the lot. */
+            if (resolveT > 0) {
+                ctx.save();
+                ctx.beginPath();
+                var any = false;
+                for (var i = 0; i < tiles.length; i++) {
+                    var t = tiles[i];
+                    if (resolveT <= t.wave) continue;
+                    any = true;
+                    var grow = ease((resolveT - t.wave) / SEAL_MS);
+                    addHex(ctx, t.x, t.y, R * (FILL + (SEAL - FILL) * grow));
+                }
+                if (any) {
+                    ctx.clip();
+                    ctx.drawImage(img, ox, oy, dw, dh);
+                }
+                ctx.restore();
+            }
 
-                // Phase 2: this spaxel dissolves, uncovering the photograph.
-                var cover = resolveT > 0
-                    ? 1 - ease((resolveT - t.wave) / RESOLVE_TILE)
-                    : 1;
-                if (cover <= 0.002) continue;
+            // Everything that has not: flat spaxel colour, or an empty socket.
+            for (var j = 0; j < tiles.length; j++) {
+                var s = tiles[j];
+                if (resolveT > s.wave) continue;
 
-                // Phase 1: dead spaxels are inferred back in.
-                var filled = t.dead
-                    ? ease((elapsed - t.delay) / INFER_TILE)
-                    : 1;
+                var filled = s.dead ? ease((elapsed - s.delay) / INFER_TILE) : 1;
 
                 if (filled < 1) {
-                    ctx.globalAlpha = (1 - filled) * 0.45 * cover;
+                    ctx.globalAlpha = (1 - filled) * 0.45;
                     ctx.strokeStyle = line;
                     ctx.lineWidth = stroke;
-                    hexPath(ctx, t.x, t.y, hexR);
+                    ctx.beginPath();
+                    addHex(ctx, s.x, s.y, hexR);
                     ctx.stroke();
                 }
 
                 if (filled > 0) {
-                    hexPath(ctx, t.x, t.y, hexR);
-                    ctx.globalAlpha = filled * cover;
-                    ctx.fillStyle = t.css;
+                    ctx.beginPath();
+                    addHex(ctx, s.x, s.y, hexR);
+                    ctx.globalAlpha = filled;
+                    ctx.fillStyle = s.css;
                     ctx.fill();
 
                     // Inferred spaxels glow in the accent as they arrive.
-                    if (t.dead && filled < 1) {
-                        ctx.globalAlpha = Math.sin(filled * Math.PI) * 0.5 * cover;
+                    if (s.dead && filled < 1) {
+                        ctx.globalAlpha = Math.sin(filled * Math.PI) * 0.5;
                         ctx.fillStyle = accent;
                         ctx.fill();
                     }

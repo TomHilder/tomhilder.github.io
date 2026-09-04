@@ -4,16 +4,19 @@
        Looks in the page bundle first, then assets/, then falls back to a
        static file. `portraitAlt` overrides the alt text. */}}
 {{- $portrait := "" }}
-{{- /* keep in step with --portrait-size in 05-photos.css */}}
-{{- $portraitSize := 172 }}
+{{- /* keep in step with --portrait-size in 05-photos.css. The portrait is
+       clipped to a hexagon, so the box carries that hexagon's aspect and
+       the derivative is cropped to match. */}}
+{{- $portraitSize := 179 }}
+{{- $portraitH := 207 }}
 {{- with .Params.portrait }}
   {{- $res := ($.Resources.ByType "image").GetMatch (printf "*%s*" .) }}
   {{- if not $res }}{{ $res = resources.Get . }}{{ end }}
   {{- if $res }}
     {{- $processable := slice "jpg" "jpeg" "png" "tif" "bmp" "gif" "webp" }}
     {{- if in $processable $res.MediaType.SubType }}
-      {{- /* 2x for retina; Fill crops a non-square source to the circle */}}
-      {{- $res = $res.Fill (printf "%dx%d Center" (mul $portraitSize 2) (mul $portraitSize 2)) }}
+      {{- /* 2x for retina; Fill crops the source to the portrait's box */}}
+      {{- $res = $res.Fill (printf "%dx%d Center" (mul $portraitSize 2) (mul $portraitH 2)) }}
     {{- end }}
     {{- $portrait = $res.Permalink }}
   {{- else }}
@@ -24,8 +27,13 @@
 <article class="post-single">
   <header class="post-header{{ if $portrait }} with-portrait{{ end }}">
     {{- with $portrait }}
-    <img class="page-portrait" data-spaxel src="{{ . }}" width="{{ $portraitSize }}" height="{{ $portraitSize }}"
-         alt="{{ $.Params.portraitAlt | default $.Title }}">
+    {{- /* The frame carries the outline and the placement: clip-path is
+           applied after filter, so a drop-shadow on the photo itself would
+           be clipped away with everything else outside the hexagon. */}}
+    <span class="portrait-frame">
+      <img class="page-portrait" data-spaxel src="{{ . }}" width="{{ $portraitSize }}" height="{{ $portraitH }}"
+           alt="{{ $.Params.portraitAlt | default $.Title }}">
+    </span>
     {{- end }}
     <div class="post-header-text">
     {{ partial "breadcrumbs.html" . }}

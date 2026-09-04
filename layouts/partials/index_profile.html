@@ -7,6 +7,10 @@
         {{- if not (urls.Parse .imageUrl).IsAbs }}
             {{- $img = resources.Get .imageUrl }}
         {{- end }}
+        {{- /* The frame carries the outline: clip-path is applied after
+               filter, so a drop-shadow on the photo itself gets clipped
+               away with everything else outside the hexagon. */}}
+        <span class="portrait-frame">
         {{- if $img }}
             {{- $processableFormats := (slice "jpg" "jpeg" "png" "tif" "bmp" "gif") -}}
             {{- if hugo.IsExtended -}}
@@ -27,6 +31,7 @@
         <img draggable="false" data-spaxel src="{{ .imageUrl | relURL }}" alt="{{ .imageTitle | default "profile image" }}" title="{{ .imageTitle }}"
             height="{{ .imageHeight | default 150 }}" width="{{ .imageWidth | default 150 }}" />
         {{- end }}
+        </span>
         </div>
         {{- end }}
 

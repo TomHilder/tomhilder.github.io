@@ -5,7 +5,9 @@
 /* Page portrait, set with `portrait:` in a page's front matter.
    Mirrors the home page treatment. */
 :root {
-    --portrait-size: 172px;
+    --portrait-size: 179px;
+    /* the hexagon's own aspect: a pointy-top one is the taller way up */
+    --portrait-height: calc(var(--portrait-size) / 0.8660254);
     --portrait-gutter: 34px;
 }
 
@@ -20,24 +22,34 @@
 }
 
 .page-portrait {
-    flex: 0 0 auto;
+    display: block;
     width: var(--portrait-size);
-    height: var(--portrait-size);
-    border-radius: 50%;
+    height: var(--portrait-height);
     object-fit: cover;
-    border: 1px solid var(--line-strong);
-    box-shadow: 0 14px 34px -20px rgba(0, 0, 0, 0.9);
+    clip-path: var(--hex-clip);
+}
+
+/* The outline and the shadow sit out here, because clip-path is applied
+   after filter and would otherwise trim them off with everything else
+   outside the hexagon. */
+.portrait-frame {
+    display: inline-block;
+    flex: 0 0 auto;
+    line-height: 0;
+    filter: var(--hex-hairline) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.55));
 }
 
 /* Wide screens: hang the portrait out in the left margin, so the page title
-   lines up with the body text underneath it instead of being indented. */
-@media screen and (min-width: 1180px) {
+   lines up with the body text underneath it instead of being indented. The
+   breakpoint has to clear the portrait's width plus its gutter, or it hangs
+   off the side of the window. */
+@media screen and (min-width: 1240px) {
     .post-header.with-portrait {
         display: block;
         position: relative;
     }
 
-    .post-header.with-portrait .page-portrait {
+    .post-header.with-portrait .portrait-frame {
         position: absolute;
         top: -2px;
         left: calc(-1 * (var(--portrait-size) + var(--portrait-gutter)));
@@ -143,8 +155,11 @@
         gap: 20px;
     }
 
-    .page-portrait {
-        --portrait-size: 124px;
+    /* On :root so the frame sees it too, and both values because
+       --portrait-height resolves its calc where it is declared. */
+    :root {
+        --portrait-size: 128px;
+        --portrait-height: 148px;
     }
 
     .post-content img[src*="#left"],

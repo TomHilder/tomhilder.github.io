@@ -41,12 +41,23 @@ body.home .main {
 }
 
 /* The canvas is here too: while the portrait resolves (see js/spaxels.js) a
-   canvas stands in for the photograph, and has to be the same shape. */
+   canvas stands in for the photograph, and has to be the same shape.
+   drop-shadow follows the clip path; box-shadow would trace the box. */
 .profile img,
 .profile canvas {
-    border-radius: 50%;
-    border: 1px solid var(--line-strong);
-    box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.9);
+    /* common/profile-mode.css rounds the photo into a circle, which would
+       intersect the hexagon and shave its corners off, and gives it a border,
+       which the clip would leave as a stub along the flat edges only. The
+       hairline lives on .portrait-frame instead. */
+    border-radius: 0;
+    border: 0;
+    object-fit: cover;
+    display: block;
+    clip-path: var(--hex-clip);
+}
+
+.profile .portrait-frame {
+    filter: var(--hex-hairline) drop-shadow(0 16px 28px rgba(0, 0, 0, 0.55));
 }
 
 .profile-text {

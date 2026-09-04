@@ -66,8 +66,11 @@ params:
           subtitle: "PhD Candidate at the School of Physics & Astronomy, Monash University. I study the ionised interstellar medium using computational statistics, particularly cutting-edge scalable Gaussian Process methods."
           imageUrl: "img/headshot.jpeg"
           imageTitle: "Tom Hilder"
-          imageWidth: 228
-          imageHeight: 228
+          # The portrait is clipped to a hexagon, so its box is that
+          # hexagon's own aspect: width : height of sqrt(3) : 2 pointy-top,
+          # or 2 : sqrt(3) flat-top. Keep in step with --hex-clip.
+          imageWidth: 237
+          imageHeight: 274
           buttons:
             - name: Blog
               url: blog/
