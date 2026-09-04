@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal academic website for **Tom Hilder**, PhD Candidate at the School of Physics & Astronomy, Monash University. Research focus: the ionised interstellar medium using computational statistics, particularly scalable Gaussian Process methods.
+Personal academic website for **Tom Hilder**, astrophysicist. Research focus: the ionised interstellar medium using computational statistics, particularly scalable Gaussian Process methods.
 
 Built with Hugo + PaperMod theme, deployed to GitHub Pages via GitHub Actions.
 

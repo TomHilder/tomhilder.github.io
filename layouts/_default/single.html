@@ -53,6 +53,11 @@
       {{- partial "post_meta.html" . -}}
       {{- partial "translation_list.html" . -}}
       {{- partial "edit_post.html" . -}}
+      {{- /* Free-text label on the end of the meta line, e.g. `note: "Invited"`
+             in a talk's front matter. */}}
+      {{- with .Params.note }}
+      {{- if or (not $.Date.IsZero) ($.Param "author") }}&nbsp;&middot;&nbsp;{{ end }}{{ . }}
+      {{- end }}
       {{- partial "post_canonical.html" . -}}
     </div>
     {{- end }}

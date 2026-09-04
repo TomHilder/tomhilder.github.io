@@ -63,7 +63,7 @@ params:
     profileMode:
           enabled: true
           title: Tom Hilder
-          subtitle: "PhD Candidate at the School of Physics & Astronomy, Monash University. I study the ionised interstellar medium using computational statistics, particularly cutting-edge scalable Gaussian Process methods."
+          subtitle: "PhD Candidate at the School of Physics & Astronomy, Monash University. I study the ionised interstellar medium using computational statistics."
           imageUrl: "img/headshot.jpeg"
           imageTitle: "Tom Hilder"
           # The portrait is clipped to a hexagon, so its box is that

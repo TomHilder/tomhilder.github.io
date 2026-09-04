@@ -78,6 +78,10 @@
   {{- end }}
   {{- if not (.Param "hideMeta") }}
   <footer class="entry-footer">
+    {{- /* Talks carry their venue in editPost.Text, which the single page
+           renders as a link. On the card it goes ahead of the date, as plain
+           text — the whole card is already one link. */}}
+    {{- with .Params.editPost.Text }}{{ . }}&nbsp;&middot;&nbsp;{{ end }}
     {{- partial "post_meta.html" . -}}
   </footer>
   {{- end }}

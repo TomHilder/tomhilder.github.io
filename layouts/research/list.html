@@ -70,6 +70,10 @@
     {{- end }}
     {{- if not ($p.Param "hideMeta") }}
     <footer class="entry-footer">
+      {{- /* Papers carry their journal in editPost.Text, which the paper page
+             renders as a link to the DOI. On the card it goes ahead of the
+             date, as plain text — the whole card is already one link. */}}
+      {{- with $p.Params.editPost.Text }}{{ . }}&nbsp;&middot;&nbsp;{{ end }}
       {{- partial "post_meta.html" $p -}}
     </footer>
     {{- end }}

@@ -5,6 +5,9 @@ tags: ["topic"]
 author: "Tom Hilder"
 description: "Brief description for search engines (< 155 chars)"
 summary: "Summary shown on list pages (< 265 chars)"
+editPost:
+    URL: "https://doi.org/"
+    Text: "Journal"
 
 ---
 

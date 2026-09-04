@@ -1,5 +1,6 @@
 ---
 title: "Talk Title"
+draft: true
 date: 2024-01-01
 tags: ["conference", "gaussian processes"]
 author: "Tom Hilder"
@@ -9,15 +10,14 @@ cover:
     image: "slide.png"
     alt: "Title slide"
     relative: true
+note: "Talk"
 editPost:
     URL: "https://conference-website.org"
     Text: "Conference Name 2024"
 
 ---
 
----
-
-##### Links
+#### Links
 
 - [Slides (PDF)](slides.pdf)
 - [Recording](https://youtube.com/watch?v=XXXXX)
@@ -25,12 +25,12 @@ editPost:
 
 ---
 
-##### Abstract
+#### Abstract
 
 Brief description of the talk content.
 
 ---
 
-##### Key Slide
+#### Key Slide
 
 ![](slide.png)
