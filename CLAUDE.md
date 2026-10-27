@@ -18,7 +18,7 @@ hugo server
 hugo --minify
 ```
 
-Hugo must be installed (`brew install hugo` on macOS). The project uses Hugo v0.147.2.
+Hugo must be installed (`brew install hugo` on macOS). The project uses Hugo extended v0.168.0 (keep in step with `HUGO_VERSION` in `.github/workflows/hugo.yml`).
 
 ## Architecture
 
@@ -33,7 +33,9 @@ Hugo must be installed (`brew install hugo` on macOS). The project uses Hugo v0.
 
 - `config.yml` - Site metadata, menu structure, theme parameters, social links
 - `layouts/` - Custom Hugo templates overriding PaperMod theme defaults
-- `static/` - Static assets (favicon, profile photo as `picture.jpeg`, CV as `cv.pdf`)
+- `themes/PaperMod/` - Vendored copy of the theme (not a submodule); edit in place if needed
+- `static/` - Static assets (favicons, icons)
+- `assets/` - Processed assets: headshot (`img/headshot.jpeg`), CSS overrides (`css/extended/`, palettes in `01-palettes.css`), portrait reveal animation (`js/spaxels.js`)
 
 **Adding content:**
 
@@ -62,7 +64,7 @@ Place associated files (PDFs, images) in the same directory as `index.md`.
 ## Site Owner
 
 - **Name:** Tom Hilder
-- **Email:** thomas.hilder@monash.edu
+- **Email:** thilder@flatironinstitute.org
 - **GitHub:** [tomhilder](https://github.com/tomhilder)
 - **Google Scholar:** [Profile](https://scholar.google.com/citations?user=q0Ol5jsAAAAJ&hl=en)
 - **ORCID:** [0000-0001-7641-5235](https://orcid.org/0000-0001-7641-5235)

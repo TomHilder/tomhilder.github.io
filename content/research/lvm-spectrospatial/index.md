@@ -25,7 +25,4 @@ editPost:
 
 <!-- Write your informal discussion here -->
 
-![](figure.png)
-*Caption for figure.*
-
 <!-- More content... -->

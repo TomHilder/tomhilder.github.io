@@ -30,7 +30,7 @@ menu:
           weight: 5
 
 params:
-    description: "Personal website of Tom Hilder, PhD Candidate at Monash University researching the ionised interstellar medium using computational statistics and scalable Gaussian Process methods."
+    description: "Personal website of Tom Hilder, Flatiron Software Research Fellow at the Center for Computational Astrophysics, researching the ionised interstellar medium using computational statistics and scalable Gaussian Process methods."
     author: Tom Hilder
     # googleAnalyticsID: "G-XXXXX"
     DateFormat: "January 2006"
@@ -63,7 +63,7 @@ params:
     profileMode:
           enabled: true
           title: Tom Hilder
-          subtitle: "PhD Candidate at the School of Physics & Astronomy, Monash University. I study the ionised interstellar medium using computational statistics."
+          subtitle: "Flatiron Software Research Fellow at the Center for Computational Astrophysics, Flatiron Institute. I study the ionised interstellar medium using computational statistics."
           imageUrl: "img/headshot.jpeg"
           imageTitle: "Tom Hilder"
           # The portrait is clipped to a hexagon, so its box is that
@@ -85,7 +85,7 @@ params:
 
     socialIcons:
         - name: Email
-          url: mailto:thomas.hilder@monash.edu
+          url: mailto:thilder@flatironinstitute.org
         - name: GitHub
           url: https://github.com/tomhilder
         - name: Google Scholar

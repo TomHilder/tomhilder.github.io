@@ -19,13 +19,10 @@ editPost:
 
 **Authors:** Thomas Hilder, Andrew R. Casey, Daniel J. Price, Christophe Pinte, et al.
 
-**Links:** [ApJ](https://doi.org/10.3847/2041-8213/adc435) · [arXiv](https://arxiv.org/abs/2504.19416) · [Code](https://github.com/tomhilder/)
+**Links:** [ApJ](https://doi.org/10.3847/2041-8213/adc435) · [arXiv](https://arxiv.org/abs/2504.19416) · [Code](https://github.com/TomHilder/disc_limo)
 
 ---
 
 <!-- Write your informal discussion here -->
-
-![](figure.png)
-*Caption for figure.*
 
 <!-- More content... -->

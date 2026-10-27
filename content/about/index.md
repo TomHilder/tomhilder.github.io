@@ -19,7 +19,7 @@ portraitAlt: "Tom Hilder"
 
 I'm an astrophysicist. I submitted my Ph.D. at the [School of Physics & Astronomy](https://www.monash.edu/science/schools/physics), Monash University in August 2026, where I worked with [A/Prof. Andrew Casey](https://astrowizici.st), [Prof. Daniel J. Price](https://users.monash.edu.au/~dprice/), and [A/Prof. Christophe Pinte](https://orcid.org/0000-0001-5907-5179). I completed my BSc with honours at Monash University.
 
-In October I will start a position as a Flatiron Software Research Fellow at the [Center for Computational Astrophysics](https://www.simonsfoundation.org/flatiron/center-for-computational-astrophysics/), Flatiron Institute.
+I am a Flatiron Software Research Fellow at the [Center for Computational Astrophysics](https://www.simonsfoundation.org/flatiron/center-for-computational-astrophysics/), Flatiron Institute.
 
 ## Research
 
@@ -38,4 +38,4 @@ You can find software that I have worked on [here](/software)
 
 ## Contact
 
-You may contact me at <thomas.hilder@monash.edu>; my other links are [here](/).
+You may contact me at <thilder@flatironinstitute.org>; my other links are [here](/).
